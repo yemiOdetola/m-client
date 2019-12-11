@@ -1,0 +1,53 @@
+.nav-cover {
+    padding: 1.2rem 1rem;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    @media(min-width: 767px) {
+        justify-content: space-between;
+    }
+    .logo {
+        font-weight: 600;
+        font-size: 1.25rem;
+    }
+    nav.menu {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+        .each-menu {
+            margin: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: rgb(90, 89, 89);
+            font-weight: 500;
+            transition: all 0.125s ease-out;
+            cursor: pointer;
+            &.text {
+                color: #6C6B6B;
+                font-weight: 300;
+            }
+            &.button {
+                margin-top: 0.25rem;
+                border: 1px solid #C4C4C4;
+                border-radius: 0.935rem;
+                padding: 0.25rem 1.5rem;
+                font-size: 0.8rem;
+                font-weight: 400;
+                position: relative;
+                &:hover {
+                    text-decoration: none;
+                    border: 1px solid #333;
+                }
+            }
+            &.item {
+                &:hover {
+                    color: #333;
+                    font-weight: 600;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

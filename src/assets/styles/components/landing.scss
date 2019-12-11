@@ -1,0 +1,165 @@
+.landing-component {
+    padding: 0 0.75rem;
+    width: 100%;
+    .banner {
+        padding: 1rem;
+        @media(min-width: 992px) {
+            padding: 2rem 3rem;
+        }
+        .banner-text {
+            margin-top: 1.5rem;
+            .tagline {
+                color: rgba(3, 168, 124, 1);
+                font-weight: bold;
+                font-size: 0.935rem;
+                margin-bottom: 1rem;
+                @media(min-width: 768px) {
+                    font-size: 1.5rem;
+                }
+            }
+            .title {
+                color: #006248;
+                font-size: 3rem;
+                text-align: left;
+                line-height: 4.25rem;
+                font-weight: 800;
+                @media(min-width: 992px) {
+                    line-height: 5rem;
+                    font-size: 3.75rem;
+                    width: 90%;
+                }
+            }
+            @media(min-width: 992px) {
+                margin-top: 4rem;
+            }
+            .intro-text {
+                font-size: 0.875rem;
+                margin: 1rem 0;
+                color: #9ca2a8;
+                @media(min-width: 768px) {
+                    font-size: 0.935rem;
+                }
+            }
+        }
+        .banner-actions {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 2rem;
+        }
+        .banner-image {
+            @media(max-width: 1199px) {
+                display: none;
+            }
+            img {
+                width: 100%;
+                @media(min-width: 1280px) {
+                    width: 90%;
+                    display: block;
+                    margin: auto;
+                }
+            }
+        }
+    }
+    .tags-cover {
+        padding: 1rem;
+        margin-top: 2.25rem;
+        @media(min-width: 992px) {
+            padding: 2rem 3rem;
+        }
+        .tags {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            @media(min-width: 992px) {
+                max-width: 90%;
+            }
+            .tag {
+                padding: 0.35rem;
+                margin: 0.75rem;
+                margin-left: 0;
+                background: #fff;
+                box-shadow: 1px 1px 11px #dadbdd;
+                color: #000;
+                font-weight: 600;
+                border-radius: 1rem;
+                transition: all 0.125s ease-in-out;
+                &:hover {
+                    cursor: pointer;
+                    box-shadow: 1px 1px 2px #dadbdd;
+                }
+                @media(min-width: 768px) {
+                    padding: 0.5rem;
+                    font-size: 1.25rem;
+                }
+                span.hash {
+                    width: 22px;
+                    height: 22px;
+                    color: #ffffff;
+                    background-color: #555;
+                    display: inline-block;
+                    border-radius: 50%;
+                    text-align: center;
+                    @media(min-width: 768px) {                       
+                        width: 30px;
+                        height: 30px;
+                    }
+                }
+            }
+        }
+    }
+    .about-mclone {
+        padding: 1rem;
+        margin-top: 3rem;
+        @media(min-width: 992px) {
+            padding: 2rem 3rem;
+            margin-top: 4rem;
+        }
+        .each-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 2.25rem 0;
+            .item {
+                display: flex;
+                justify-content: flex-start;
+                width: 50%;
+                img {
+                    display: block;
+                    margin-right: 0.75rem;
+                    width: 25px;
+                    height: 25px;
+                    box-shadow: 1px 1px 6px #d4d5d7;
+                    padding: 0.35rem;
+                    border-radius: 50%;
+                    // background: #C2FFEC;
+                    @media(min-width: 768px) {
+                        width: 45px;
+                        height: 45px;
+                        margin-right: 1rem;
+                    }
+                }
+                .text {
+                    color: #0a2b12;
+                    font-weight: 800;
+                    position: relative;
+                    top: 0.5rem;
+                    @media(min-width: 768px) {
+                        font-size: 1.125rem;
+                    }
+                }
+            }
+        }
+        .trial {
+            font-size: 2rem;
+            color: #fff;
+            font-weight: 800;
+            background: rgb(7, 158, 113);
+            padding: 1rem;
+            box-shadow: 1px 1px 1rem #d4d5d7;
+            border-radius: 2rem;
+            @media(min-width: 992px) {
+                font-size: 4rem;
+                padding: 1.5rem;
+            }
+        }
+    }
+}

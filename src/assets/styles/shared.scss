@@ -1,0 +1,128 @@
+body {
+    font-family: 'Nunito';
+    color: #6C6B6B;
+    background-color: rgb(252, 252, 253);
+}
+
+#root {
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+/////////////////////////   utils  start  //////////////////////
+
+.component-heading1 {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.component-heading2 {
+    font-size: 0.8875rem;
+    color: rgba(117, 117, 117, 0.82);
+}
+
+/////////////////////////   utils end  //////////////////////
+.mt-5rem {
+    margin-top: 5rem;
+}
+
+//////////////////////   forms  start  //////////////////
+.bttn {
+    width: 120px;
+    height: 43px;
+    border-radius: 1.75rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: none;
+    display: block;
+    transition: 0.15s all ease-in-out;
+    @media(min-width: 768px) {
+        width: 143px;
+        height: 48px;
+        font-size: 0.935rem;
+    }
+    &.small {
+        width: 80px;
+        height: 2rem;
+        font-size: 0.75rem;
+    }
+    &:hover {
+        cursor: pointer;
+        box-shadow: 1px 1px 4px rgb(150, 179, 170);
+    }
+    &:active, &:focus {
+        outline: none;
+    }
+    &.primary {
+        background-color: #C2FFEC;
+        color: #333;
+    }
+    &.plain {
+        color: #01BA82;
+        text-decoration: underline;
+        background: none;
+        &:hover {
+            text-decoration: none;
+            box-shadow: none;
+        }
+    }
+    &.dye {
+        background: linear-gradient(270deg, rgba(1, 122, 162, 0.86) 6.07%, #019E90 53.62%, #01BA82 90%);
+        color: #fff;
+    }
+}
+
+.form-container {
+    width: 100%;
+    .form-item {
+        margin-bottom: 1.25rem;
+        label {
+            display: block;
+            font-size: 0.875rem;
+            color: #333;
+            margin-bottom: 0.75rem;
+        }
+        input, textarea {
+            width: 100%;
+            border: 0.75px solid #888;
+            border-radius: 0.25rem;
+            padding: 0.25rem 1rem;
+            &:active, &:focus {
+                outline: none;
+                border: 1.75px solid #019E90;
+            }
+        }
+        input {
+            height: 44px;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+//////////////////////   forms    //////////////////
+
+
+//////////////////////   cards    //////////////////
+.kard {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 70px rgba(1, 122, 162, 0.3);
+    border-radius: 2rem;
+    padding: 1.50rem;
+    font-weight: 500;
+    @media(min-width: 768px) {
+        padding: 2.25rem;
+    }
+    &-title {
+        font-weight: 600;
+        font-size: 1.75rem;
+        line-height: 48px;
+        margin-bottom: 0.875rem;
+    }
+}
