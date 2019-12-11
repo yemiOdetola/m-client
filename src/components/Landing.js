@@ -20,7 +20,7 @@ export class Landing extends Component {
             <>
                 <Header />
                 <div className="landing-component">
-                    <div className="banner">
+                    <div className="banner section-spacing">
                         <div className="row">
                             <div className="col-xl-5 col-md-12">
                                 <div className="banner-text">
@@ -45,7 +45,7 @@ export class Landing extends Component {
 
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="tags-cover">
+                            <div className="tags-cover section-spacing">
                                 <div className="component-heading1 mt-4 mb-3">Recently featured tags</div>
                                 <div className="tags">
                                     {tags}
@@ -54,7 +54,7 @@ export class Landing extends Component {
                         </div>
                     </div>
 
-                    <div className="about-mclone">
+                    <div className="about-mclone section-spacing">
                         <div className="component-heading1">Lets do this</div>
                         <div className="row">
                             <div className="col-xl-5">

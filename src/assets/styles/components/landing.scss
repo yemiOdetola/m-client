@@ -2,10 +2,6 @@
     padding: 0 0.75rem;
     width: 100%;
     .banner {
-        padding: 1rem;
-        @media(min-width: 992px) {
-            padding: 2rem 3rem;
-        }
         .banner-text {
             margin-top: 1.5rem;
             .tagline {
@@ -61,11 +57,6 @@
         }
     }
     .tags-cover {
-        padding: 1rem;
-        margin-top: 2.25rem;
-        @media(min-width: 992px) {
-            padding: 2rem 3rem;
-        }
         .tags {
             display: flex;
             justify-content: flex-start;
@@ -108,10 +99,8 @@
         }
     }
     .about-mclone {
-        padding: 1rem;
         margin-top: 3rem;
         @media(min-width: 992px) {
-            padding: 2rem 3rem;
             margin-top: 4rem;
         }
         .each-row {

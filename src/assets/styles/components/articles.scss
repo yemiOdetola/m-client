@@ -1,0 +1,69 @@
+.articles-component {
+    @media(min-width: 992px) {
+        width: 90%;
+        margin: auto;
+    }
+    .article {
+        max-width: 720px;
+        text-align: left;
+        display: block;
+        margin: 1.5rem 0;
+        &:hover {
+            cursor: pointer;
+        }
+        @media(min-width: 768px) {
+            display: flex;
+            justify-content: center;
+        }
+        .feature-img {
+            @media(min-width: 768px) {
+                margin-right: 2rem;
+            }
+            img {
+                display: block;
+                width: 100%;
+                @media(min-width: 768px) {
+                    width: 188px;
+                }
+            }
+        }
+        .details {
+            .tag {
+                color: rgb(185, 185, 185);
+                font-weight: 300;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                font-size: 0.75rem;
+            }
+            .title {
+                font-weight: 600;
+                color: #000;
+                font-size: 1.125rem;
+                letter-spacing: -0.5px;
+                margin: 0;
+                @media(min-width: 768px) {
+                    font-size: 1.25rem;
+                }
+            }
+            .description {
+                font-size: 0.875rem;
+                margin-top: 0.25rem;
+                @media(min-width: 768px) {
+                    font-size: 0.935rem;
+                }
+            }
+            .others {
+                margin-top: 1.25rem;
+                display: flex;
+                justify-content: space-between;
+                .author-time {
+                    color: #333;
+                    font-size: 0.75rem;
+                    @media(min-width: 768px) {
+                        font-size: 0.875rem;
+                    }
+                }
+            }
+        }
+    }
+}
