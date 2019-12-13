@@ -1,19 +1,23 @@
 .articles-component {
     @media(min-width: 992px) {
-        width: 90%;
+        width: 82%;
         margin: auto;
     }
     .article {
-        max-width: 720px;
+        max-width: 650px;
         text-align: left;
         display: block;
-        margin: 0 0 2.5rem;
+        margin: 0 0 3rem;
         &:hover {
             cursor: pointer;
         }
+        @media(max-width: 767px) {
+            padding: 1.25rem;
+            box-shadow: 1px 1px 4px #d4d5d7;
+            border-radius: 0.25rem;
+        }
         @media(min-width: 768px) {
             display: flex;
-            justify-content: center;
         }
         .feature-img {
             @media(min-width: 768px) {
@@ -23,17 +27,21 @@
                 display: block;
                 width: 100%;
                 @media(min-width: 768px) {
-                    width: 188px;
+                    width: 160px;
                 }
             }
         }
         .details {
+            width: 95%;
+            @media(max-width: 767px) {
+                margin-top: 1.5rem;
+            }
             .tag {
                 color: rgb(185, 185, 185);
                 font-weight: 300;
                 text-transform: uppercase;
                 letter-spacing: 1.5px;
-                font-size: 0.75rem;
+                font-size: 0.65rem;
             }
             .title {
                 font-weight: 600;
@@ -61,6 +69,97 @@
                     font-size: 0.75rem;
                     @media(min-width: 768px) {
                         font-size: 0.875rem;
+                    }
+                }
+                .actions {
+                    display: flex;
+                    position: relative;
+                    bottom: 0.25rem;
+                   img.favorite {
+                       width: 22px;
+                   }
+                }
+            }
+        }
+    }
+    .sidebar {
+        .header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0.75rem;
+            min-height: 100px;
+            background-color: rgba(199, 255, 224, 0.61);
+            // @media(min-width: 1280px) {
+            //     margin: auto 1rem;
+            // }
+            .title {
+                text-align: left;
+                text-transform: capitalize;
+                font-size: 1.125rem;
+                color: #000000;
+                font-weight: 800;
+                margin: auto 0;
+                @media(min-width: 1200px) {
+                    width: 40%;
+                    font-size: 1.75rem
+                }
+            }
+            .illustration-mello {
+                img {
+                    width: 95px;
+                    @media(min-width: 768px) {
+                        width: 100px;
+                    }
+                }
+            }
+        }
+        .body {
+            background: rgb(245, 245, 245);
+            padding: 2.25rem 1.5rem;
+            margin: 0.5rem 0;
+            .article-preview {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1.25rem;
+                .icon {
+                    img {
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        margin: auto;
+                    }
+                    .index {
+                        color: rgb(173, 173, 173);
+                        font-weight: 300;
+                        font-size: 1.75rem;
+                        letter-spacing: -4px;
+                        margin-right: 0.75rem;
+                    }
+                }
+                .detail {
+                    text-align: left;
+                    .title {
+                        font-size: 0.80rem;
+                        color: #333;
+                        font-weight: 700;
+                        @media(min-width: 1024px) {
+                            font-size: 0.935rem;
+                        }
+                    }
+                    .author {
+                        font-size: 0.75rem;
+                        color: #555;
+                        margin-top: 0.25rem;
+                        font-weight: 300;
+                        @media(min-width: 1024px) {
+                            font-size: 0.875rem;
+                        }
+                    }
+                    .extras {
+                        font-size: 0.75rem;
+                        color: #777;
+                        font-weight: 500;
                     }
                 }
             }
