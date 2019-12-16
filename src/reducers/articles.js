@@ -16,7 +16,7 @@ export default function articles(state = initialState, action) {
         case FETCH_ARTICLE:
             return {
                 ...state,
-                article: action.payload.article
+                article: action.article
             }
         case FETCH_TAGS:
             return {

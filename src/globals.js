@@ -5,6 +5,14 @@ const globals = {
         }
         return str.charAt(0).toUpperCase() + str.slice(1)
     },
+    checkFavorite: function(arr, userId) {
+        const favorited = arr.filter(user => user === userId);
+        if(typeof favorited[0] !== 'undefined') {
+            return true;
+        } else {
+            return false;
+        }
+    },
     converToLocal: function (tzDate) {
         let d = new Date(tzDate);
         const year = d.getFullYear();

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../assets/styles/components/articles.scss';
 import '../assets/styles/shared.scss';
 import Header from './layouts/Header';
@@ -11,7 +12,8 @@ export class Articles extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bookmark: false
+            bookmark: false,
+            userId: '5ddba1c9ba0b85579c87b474'
         }
     }
 
@@ -30,39 +32,41 @@ export class Articles extends Component {
         this.props.articles.forEach((article, index) => {
             articles.push(
                 <article className="article" key={index}>
-                    <div className="feature-img">
-                        {article.feature_img ?
-                            <img src={article.feature_img} alt={article.name} /> :
-                            <img src={require('../assets/images/404.svg')} alt="not found" />
-                        }
-                    </div>
-                    <div className="details">
-                        <div className="tag"><span className="hash">#</span>{article.tags[0]}</div>
-                        <h2 className="title">{globals.capitalize(article.title)}</h2>
-                        <div className="description">{article.description}</div>
-                        <div className="others">
-                            <div className="author-time">
-                                <div className="info author">by {article.author.username} on {globals.converToLocal(article.createdAt)}</div>
-                            </div>
-                            <div className="actions">
-                                <img src={require('../assets/images/unbookmark.svg')}
-                                    className={!this.state.bookmark ? 'favorite' : 'hide'} onClick={this.toggleToggle} alt="" />
-                                <img src={require('../assets/images/bookmarked.svg')}
-                                    className={this.state.bookmark ? 'favorite' : 'hide'} onClick={this.toggleToggle} alt="" />
+                    <Link to={`/article/${article._id}`}>
+                        <div className="feature-img">
+                            {article.feature_img ?
+                                <img src={article.feature_img} alt={article.name} /> :
+                                <img src={require('../assets/images/404.svg')} alt="not found" />
+                            }
+                        </div>
+                        <div className="details">
+                            <div className="tag"><span className="hash">#</span>{article.tag}</div>
+                            <h2 className="title">{globals.capitalize(article.title)}</h2>
+                            <div className="description">{article.description}</div>
+                            <div className="others">
+                                <div className="author-time">
+                                    <div className="info author">by {globals.capitalize(article.author.username)} on {globals.converToLocal(article.createdAt)}</div>
+                                </div>
+                                <div className="actions">
+                                    <img src={require('../assets/images/unbookmark.svg')}
+                                        className={globals.checkFavorite(article.favorites, this.state.userId) ? 'hide' : 'favorite'} onClick={this.toggleToggle} alt="" />
+                                    <img src={require('../assets/images/bookmarked.svg')}
+                                        className={globals.checkFavorite(article.favorites, this.state.userId) ? 'favorite' : 'hide'} onClick={this.toggleToggle} alt="" />
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </article>
             )
         })
         return (
             <>
                 <Header />
-                <div className="articles-component section-spacing">
+                <div className="articles-component component-spacing">
                     <div className="component-heading1 mb-4">All Articles</div>
                     <div className="row">
-                        <div className="col-xl-8">{articles}</div>
-                        <div className="col-xl-4">
+                        <div className="col-lg-8">{articles}</div>
+                        <div className="col-lg-4">
                             <div className="sidebar">
                                 <div className="each-bar most-viewed">
                                     <div className="header">
@@ -143,7 +147,8 @@ Articles.propTypes = {
 }
 
 const mapstateToProps = state => ({
-    articles: state.articles.articles
+    articles: state.articles.articles,
+    user: state.auth.user
 })
 
 export default connect(mapstateToProps, { fetchArticles })(Articles)

@@ -25,9 +25,9 @@ export function fetchArticle(id) {
                     alert(response.status);
                     return console.log(response, 'not successful');
                 }
-                const payload = response.data;
-                console.log('retrieved article details', payload)
-                dispatch(singleArticle(payload))
+                const article = response.data.article;
+                console.log('retrieved article details', article)
+                dispatch(singleArticle(article))
             })
     }
 }
@@ -54,10 +54,10 @@ function allTags(payload) {
     }
 }
 
-function singleArticle(payload) {
+function singleArticle(article) {
     return {
         type: FETCH_ARTICLE,
-        payload
+        article
     }
 }
 
