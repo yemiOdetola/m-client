@@ -18,6 +18,7 @@ export class Articles extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props);
         this.props.fetchArticles();
     }
 
