@@ -12,10 +12,12 @@ export class Landing extends Component {
     }
     render() {
         let tags = [];
-        const fetchedTags = this.props.tags;
-        fetchedTags.forEach((tag, index) => {
-            tags.push(<div className="tag" key={index}><span className="hash">#</span>&nbsp; {tag}</div>)
-        })
+        if (this.props.tags) {
+            const fetchedTags = this.props.tags;
+            fetchedTags.forEach((tag, index) => {
+                tags.push(<div className="tag" key={index}><span className="hash">#</span>&nbsp; {tag}</div>)
+            })
+        }
         return (
             <>
                 <Header />
@@ -101,4 +103,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps, {fetchTags})(Landing);
+export default connect(mapStateToProps, { fetchTags })(Landing);

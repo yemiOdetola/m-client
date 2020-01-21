@@ -5,6 +5,20 @@ const globals = {
         }
         return str.charAt(0).toUpperCase() + str.slice(1)
     },
+    trimTitle: function(str) {
+        if(typeof str !== 'string' && str.length > 70) {
+            return;
+        }
+        let substr = str.substring(0, 70)
+        return `${substr}...`
+    },
+    trimSubtitle: function(str) {
+        if(typeof str !== 'string' && str.length > 136) {
+            return;
+        }
+        let substr = str.substring(0, 136)
+        return `${substr}...`
+    },
     checkFavorite: function(arr, userId) {
         const favorited = arr.filter(user => user === userId);
         if(typeof favorited[0] !== 'undefined') {

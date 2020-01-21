@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import Header from './layouts/Header';
 import { fetchArticle } from '../actions/articles';
 import globals from '../globals';
+import '../assets/styles/components/article.scss';
 
 
 export class Article extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId: '5ddba1c9ba0b85579c87b474'
+            userId: ''
         }
     }
     componentDidMount() {
@@ -23,7 +24,7 @@ export class Article extends Component {
             <>
                 <Header />
                 <div className="article-component component-spacing">
-                    <div className="title">{this.props.article.title}</div>
+                    <h1 className="title">{this.props.article.title}</h1>
                     <div className="user-share">
                         <div className="user">
                             <div className="profile-img">
@@ -44,9 +45,9 @@ export class Article extends Component {
                         </div>
                     </div>
                     <figure className="feature-img">
-                        <img src={this.props.article.feature_img} alt={this.props.feature_img}/>
+                        <img src={this.props.article.feature_img} alt={this.props.feature_img} />
                     </figure>
-        <div className="description">{this.props.article.description}</div>
+                    <div className="description">{this.props.article.description}</div>
                     <div className="body">{this.props.article.body}</div>
 
                 </div>

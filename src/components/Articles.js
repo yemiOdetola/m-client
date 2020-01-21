@@ -33,31 +33,31 @@ export class Articles extends Component {
         this.props.articles.forEach((article, index) => {
             articles.push(
                 <article className="article" key={index}>
-                    <Link to={`/article/${article._id}`}>
-                        <div className="feature-img">
-                            {article.feature_img ?
-                                <img src={article.feature_img} alt={article.name} /> :
-                                <img src={require('../assets/images/404.svg')} alt="not found" />
-                            }
-                        </div>
-                        <div className="details">
-                            <div className="tag"><span className="hash">#</span>{article.tag}</div>
-                            <h2 className="title">{globals.capitalize(article.title)}</h2>
-                            <div className="description">{article.description}</div>
-                            <div className="others">
-                                <div className="author-time">
-                                    <div className="info author">by {globals.capitalize(article.author.username)} on {globals.converToLocal(article.createdAt)}</div>
-                                </div>
-                                <div className="actions">
-                                    <img src={require('../assets/images/unbookmark.svg')}
-                                        className={globals.checkFavorite(article.favorites, this.state.userId) ? 'hide' : 'favorite'} onClick={this.toggleToggle} alt="" />
-                                    <img src={require('../assets/images/bookmarked.svg')}
-                                        className={globals.checkFavorite(article.favorites, this.state.userId) ? 'favorite' : 'hide'} onClick={this.toggleToggle} alt="" />
-                                </div>
+                    <div className="feature-img">
+                        {article.feature_img ?
+                            <img src={article.feature_img} alt={article.name} /> :
+                            <img src={require('../assets/images/404.svg')} alt="not found" />
+                        }
+                    </div>
+                    <div className="details">
+                        <div className="tag"><span className="hash">#</span>{article.tag}</div>
+                        <h2 className="title">
+                            <Link to={`/article/${article._id}`}>{globals.trimTitle(article.title)}</Link>
+                        </h2>
+                        <div className="description"> <Link to={`/article/${article._id}`}>{globals.trimSubtitle(article.description)}</Link></div>
+                        <div className="others">
+                            <div className="author-time">
+                                <div className="info author">by <Link to="/user/">{globals.capitalize(article.author.username)}</Link> on {globals.converToLocal(article.createdAt)}</div>
+                            </div>
+                            <div className="actions">
+                                <img src={require('../assets/images/unbookmark.svg')}
+                                    className={globals.checkFavorite(article.favorites, this.state.userId) ? 'hide' : 'favorite'} onClick={this.toggleToggle} alt="" />
+                                <img src={require('../assets/images/bookmarked.svg')}
+                                    className={globals.checkFavorite(article.favorites, this.state.userId) ? 'favorite' : 'hide'} onClick={this.toggleToggle} alt="" />
                             </div>
                         </div>
-                    </Link>
-                </article>
+                    </div>
+                </article >
             )
         })
         return (
