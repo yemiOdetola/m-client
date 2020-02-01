@@ -5,13 +5,15 @@ import Header from './layouts/Header';
 import { fetchArticle } from '../actions/articles';
 import globals from '../globals';
 import '../assets/styles/components/article.scss';
+import Loader from './utils/Loader';
 
 
 export class Article extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId: ''
+            userId: '5ddba1c9ba0b85579c87b474',
+            loading: true
         }
     }
     componentDidMount() {
@@ -19,7 +21,7 @@ export class Article extends Component {
         this.props.fetchArticle(id);
     }
     render() {
-        if (!this.props.article.author) return <h1>Loading...</h1>
+        if (!this.props.article.author) return <Loader loading={this.state.loading}/>
         return (
             <>
                 <Header />
@@ -32,7 +34,7 @@ export class Article extends Component {
                             </div>
                             <div className="others">
                                 <div className="name">{this.props.article.author.name}</div>
-                                <div className="follow"><button>follow</button></div>
+                                <div className="follow"><button className="bttn small actions">follow</button></div>
                             </div>
                         </div>
                         <div className="social-favorite">

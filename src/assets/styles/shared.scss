@@ -17,10 +17,12 @@ body {
 .component-heading1 {
     font-size: 1.25rem;
     font-weight: bold;
+    font-family: 'EB Garamond', serif;
 }
 .component-heading2 {
     font-size: 0.8875rem;
     color: rgba(117, 117, 117, 0.82);
+    font-family: 'EB Garamond', serif;
 }
 
 .component-spacing {
@@ -82,15 +84,27 @@ body {
     border: none;
     display: block;
     transition: 0.15s all ease-in-out;
+    a {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
     @media(min-width: 768px) {
         width: 143px;
         height: 48px;
         font-size: 0.935rem;
     }
     &.small {
-        width: 80px;
-        height: 2rem;
-        font-size: 0.75rem;
+        width: 55px;
+        height: 1.5rem;
+        font-size: 0.65rem;
+    }
+    &.actions {
+        border: 1px solid #777;
+        background: none;
+        height: 1.25rem;
+        &:hover {
+            box-shadow: none;
+        }
     }
     &:hover {
         cursor: pointer;
@@ -160,6 +174,7 @@ body {
         font-size: 1.75rem;
         line-height: 48px;
         margin-bottom: 0.875rem;
+        font-family: 'EB Garamond', serif;
     }
 }
 //-------------------   cards end   -------------------

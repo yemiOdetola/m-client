@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Landing from './components/Landing';
 import Articles from './components/Articles';
-import Signup from './components/Signup';
+import Register from './components/Register';
 import Article from './components/Article';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <Route path='/' exact component={Landing}/>
       <Route path='/article/:id' component={Article} />
       <Route path='/articles' component={Articles} />
-      <Route path='/signup' component={Signup} />
+      <Route path='/register' component={Register} />
       <Route path='**' component={Landing}/>
     </Switch>
   );

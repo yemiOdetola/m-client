@@ -5,7 +5,7 @@ import Header from './layouts/Header';
 import PropTypes from 'prop-types';
 import { signup } from '../actions/auth';
 
-export class Signup extends Component {
+export class Register extends Component {
     constructor() {
         super();
         this.state = {
@@ -38,7 +38,9 @@ export class Signup extends Component {
         this.props.signup(payload);
     }
     componentDidMount() {
-        console.log(this.props);
+        if (localStorage.getItem('mcUserToken')) {
+            this.props.history.push('/login');
+        }
     }
     render() {
         return (
@@ -47,7 +49,6 @@ export class Signup extends Component {
                 <div className="form-component">
                     <div className="row">
                         <div className="col-lg-12">
-
                             <div className="kard mt-5">
                                 <div className="component-heading2 mt-2 mb-5">
                                     Let’s get you ready on journey in reading articles that fits your situation and goals.
@@ -102,8 +103,8 @@ export class Signup extends Component {
 }
 
 
-Signup.propTypes = {
+Register.propTypes = {
     signup: PropTypes.func.isRequired
 }
 
-export default connect(null, { signup })(Signup)
+export default connect(null, { signup })(Register)

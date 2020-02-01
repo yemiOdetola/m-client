@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 import '../assets/styles/components/landing.scss';
 import Header from './layouts/Header';
 import PropTypes from 'prop-types';
@@ -33,7 +34,7 @@ export class Landing extends Component {
                                     </div>
                                 </div>
                                 <div className="banner-actions">
-                                    <button className="bttn dye mr-2">Get started</button>
+                                    <button className="bttn dye mr-2"><Link to="/register">Get started</Link></button>
                                     <button className="bttn plain">or learn more</button>
                                 </div>
                             </div>
@@ -81,7 +82,7 @@ export class Landing extends Component {
                                     </div>
                                 </div>
                                 <div className="banner-actions mt-5">
-                                    <button className="bttn dye">See articles</button>
+                                    <button className="bttn dye"><Link to="/articles">See articles</Link></button>
                                 </div>
                             </div>
                             <div className="col-xl-7 p-0 mt-3">
