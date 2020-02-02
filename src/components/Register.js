@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 import '../assets/styles/components/register.scss';
 import Header from './layouts/Header';
 import PropTypes from 'prop-types';
-import { signup } from '../actions/auth';
+import Loader from './utils/Loader';
+import { register } from '../actions/auth';
 
 export class Register extends Component {
     constructor() {
@@ -14,7 +16,8 @@ export class Register extends Component {
             username: '',
             password: '',
             password2: '',
-            bio: ''
+            bio: '',
+            loading: false
         }
     }
 
@@ -25,6 +28,9 @@ export class Register extends Component {
     };
     submitForm = (e) => {
         e.preventDefault();
+        this.setState({
+            loading: true
+        })
         if (this.state.password !== this.state.password2) {
             return alert('password did not match');
         }
@@ -35,22 +41,23 @@ export class Register extends Component {
             password: this.state.password,
             bio: this.state.bio
         }
-        this.props.signup(payload);
+        this.props.register(this.props, payload);
     }
     componentDidMount() {
-        if (localStorage.getItem('mcUserToken')) {
-            this.props.history.push('/login');
-        }
+        // if (localStorage.getItem('mcUserToken')) {
+        //     this.props.history.push('/login');
+        // }
     }
     render() {
         return (
             <>
                 <Header />
+                <Loader loading={this.state.loading} />
                 <div className="form-component">
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="kard mt-5">
-                                <div className="component-heading2 mt-2 mb-5">
+                                <div className="form-heading  mt-2 mb-5">
                                     Let’s get you ready on journey in reading articles that fits your situation and goals.
                                 </div>
                                 <div className="form-container">
@@ -87,14 +94,15 @@ export class Register extends Component {
                                                 onChange={e => this.handleChange("bio", e.target.value)}>
                                             </textarea>
                                         </div>
-                                        <button type="button" onClick={this.submitForm} className="bttn dye mt-5 mx-auto">Sign up</button>
+                                        <button disabled={this.state.loading} type="button" onClick={this.submitForm} className="bttn dye mt-5 mx-auto">Submit</button>
                                     </form>
+                                    <div className="auth-extra">Already have an account? <Link to='/login'>Login</Link></div>
+                                    <div className="auth-extra mt-3">By signing up, we assume you agree to our terms and usage policy</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="component-heading2 mt-5">By signing up, we assume you agree to our terms and usage policy</div>
                     </div>
                 </div>
             </>
@@ -104,7 +112,7 @@ export class Register extends Component {
 
 
 Register.propTypes = {
-    signup: PropTypes.func.isRequired
+    register: PropTypes.func.isRequired
 }
 
-export default connect(null, { signup })(Register)
+export default connect(null, { register })(Register)

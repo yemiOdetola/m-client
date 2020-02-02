@@ -4,6 +4,7 @@ import Landing from './components/Landing';
 import Articles from './components/Articles';
 import Register from './components/Register';
 import Article from './components/Article';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path='/article/:id' component={Article} />
       <Route path='/articles' component={Articles} />
       <Route path='/register' component={Register} />
+      <Route path='/login' component={Login} />
       <Route path='**' component={Landing}/>
     </Switch>
   );

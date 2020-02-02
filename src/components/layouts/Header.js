@@ -12,7 +12,14 @@ export class Header extends Component {
                         <div className="nav-cover">
                             <div className="logo">LOGO</div>
                             <nav className="menu">
-                                <div className="each-menu text">Already have an account?</div>
+                                {/* <div className="each-menu text">Already have an account?</div> */}
+                                <button type="button" className="bttn dye small">Login</button>
+                            </nav>
+                        </div>
+                        <div className="mobile-menu">
+                            <div className="logo">LOGO</div>
+                            <nav className="menu">
+                                {/* <div className="each-menu text">Already have an account?</div> */}
                                 <button type="button" className="bttn dye small">Login</button>
                             </nav>
                         </div>

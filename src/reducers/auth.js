@@ -1,4 +1,4 @@
-import { SIGN_UP } from '../actions/action-constants';
+import { LOGIN } from '../actions/action-constants';
 
 const initialState = {
     user: {}
@@ -6,7 +6,7 @@ const initialState = {
 
 export default function articles(state = initialState, action) {
     switch (action.type) {
-        case SIGN_UP:
+        case LOGIN:
             let user = Object.assign({}, action.payload);
             return {
                 ...state,

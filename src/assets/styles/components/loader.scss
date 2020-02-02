@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   position: absolute;
+  z-index: 99;
 }
 
 .lds-ripple {
@@ -12,6 +13,7 @@
   position: relative;
   width: 80px;
   height: 80px;
+  z-index: 99;
 }
 .lds-ripple div {
   position: absolute;
