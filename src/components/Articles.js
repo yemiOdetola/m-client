@@ -7,6 +7,7 @@ import Header from './layouts/Header';
 import PropTypes from 'prop-types';
 import { fetchArticles } from '../actions/articles';
 import globals from '../globals';
+import Loader from './utils/Loader';
 
 export class Articles extends Component {
     constructor(props) {
@@ -29,6 +30,7 @@ export class Articles extends Component {
     }
 
     render() {
+        if (!this.props.articles[0]) return <Loader loading={this.state.loading}/>
         const articles = [];
         this.props.articles.forEach((article, index) => {
             articles.push(
@@ -47,7 +49,7 @@ export class Articles extends Component {
                         <div className="description"> <Link to={`/article/${article._id}`}>{globals.trimSubtitle(article.description)}</Link></div>
                         <div className="others">
                             <div className="author-time">
-                                <div className="info author">by <Link to="/user/">{globals.capitalize(article.author.username)}</Link> on {globals.converToLocal(article.createdAt)}</div>
+                                <div className="info author">by <Link to="/user/">{article.author.username}</Link> on {globals.converToLocal(article.createdAt)}</div>
                             </div>
                             <div className="actions">
                                 <img src={require('../assets/images/unbookmark.svg')}

@@ -37,7 +37,7 @@ export class Header extends Component {
                                 <div className="each-menu text">Account</div>
                                 <div className="each-menu text">Account</div>
                                 <button type="button" className="bttn dye small">login</button>
-                                <button type="button" className="bttn danger small">logout</button>
+                                <button type="button" className="bttn danger ml-2 small">logout</button>
                             </nav>
                         </div>
                         <div className="mobile-menu">
@@ -56,6 +56,7 @@ export class Header extends Component {
                             <div className="each">item</div>
                             <div className="each">item</div>
                             <button type="button" className="bttn dye small">Login</button>
+                                <button type="button" className="bttn danger mt-2 small">logout</button>
                         </div>
                     </header>
                 </div>
