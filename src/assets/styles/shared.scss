@@ -39,6 +39,11 @@ body {
     }
 }
 
+.slide-in {
+	position: relative;
+	animation: slideIn 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .mt-5rem {
     margin-top: 5rem;
 } 
@@ -117,7 +122,7 @@ body {
     }
     &:hover {
         cursor: pointer;
-        box-shadow: 1px 1px 4px rgb(150, 179, 170);
+        box-shadow: 1px 1px 4px rgba(49, 49, 49, 0.05);
     }
     &:active, &:focus {
         outline: none;
@@ -125,6 +130,10 @@ body {
     &.primary {
         background-color: #C2FFEC;
         color: #333;
+    }
+    &.danger {
+        background-color: rgb(255, 68, 68);
+        color: #FFF;
     }
     &.plain {
         color: #01BA82;
@@ -168,6 +177,7 @@ body {
     }
 }
 
+
 //-------------------   forms  end  ------------------
 //-------------------   cards  start  -------------------
 .kard {
@@ -207,4 +217,14 @@ body {
       transform: scale(3) rotate(45deg) translateY(-90px);
       opacity: 0;
     }
+}
+
+@keyframes slideIn {
+	from {
+		transform: translateY(1rem);
+	}
+
+	to {
+		transform: translateY(0);
+	}
 }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import '../assets/styles/components/register.scss';
+import Loader from './utils/Loader';
 import Header from './layouts/Header';
 import PropTypes from 'prop-types';
 import { login } from '../actions/auth';
-import Loader from './utils/Loader';
+import '../assets/styles/components/register.scss';
 
 export class Login extends Component {
     constructor() {

@@ -44,9 +44,9 @@ export class Register extends Component {
         this.props.register(this.props, payload);
     }
     componentDidMount() {
-        // if (localStorage.getItem('mcUserToken')) {
-        //     this.props.history.push('/login');
-        // }
+        if (localStorage.getItem('mcUserToken')) {
+            this.props.history.push('/login');
+        }
     }
     render() {
         return (

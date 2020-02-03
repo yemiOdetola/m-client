@@ -7,13 +7,6 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    @media(min-width: 768px) {
-        justify-content: space-between;
-    }
-    .logo {
-        font-weight: 600;
-        font-size: 1.25rem;
-    }
     nav.menu {
         margin: 0;
         padding: 0;
@@ -39,11 +32,52 @@
                 }
             }
         }
+        button {
+            position: relative;
+            top: 0.25rem;
+        }
     }
 }
-
+.logo {
+    img {
+        width: 78px;
+        height: auto;
+        @media(min-width: 768px) {
+            width: 98px
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
 .mobile-menu {
+    padding: 1rem;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
     @media(min-width: 768px) {
         display: none;
+    }
+    .menu {
+        img {
+            width: 33px;
+        }
+    }
+}
+.menu-items {
+    position: absolute;
+    padding: 1.2rem;
+    border-radius: 0.25rem;
+    background-color: #FFF;
+    box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    top: 5rem;
+    left: 10%;
+    z-index: 999;
+    .each {
+        font-size: 0.875rem;
+        color: #333;
+        margin: 0.75rem 0;
     }
 }
