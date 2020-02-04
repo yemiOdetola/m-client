@@ -14,6 +14,7 @@ export class Article extends Component {
         this.state = {
             loading: false,
             id: '',
+            rows: 1,
         }
     }
     componentDidMount() {
@@ -37,6 +38,14 @@ export class Article extends Component {
         setTimeout(() => {
             window.location.reload();
         }, 100);
+    }
+
+    commentFocus = () => {
+        this.setState({ rows: 4 })
+    }
+
+    commentBlur = () => {
+        this.setState({ rows: 1 })
     }
 
     render() {
@@ -71,6 +80,22 @@ export class Article extends Component {
                     </figure>
                     <div className="description">{this.props.article.description}</div>
                     <div className="body">{this.props.article.body}</div>
+                    <div className="body">
+                        <h2 className="component-heading1">Comments</h2>
+                        <div className="new-comment">
+                            <form onSubmit={this.submitForm}>
+                                <textarea 
+                                    className={this.state.rows > 1 ? "slide-in" : ''}
+                                    placeholder={`Write a comment @${this.props.article.author.username}`}
+                                    rows={this.state.rows}
+                                    onFocus={this.commentFocus}
+                                    onBlur={this.commentBlur}></textarea>
+                            </form>
+                        </div>
+                        <div className="comments">
+
+                        </div>
+                    </div>
                 </div>
             </>
         )

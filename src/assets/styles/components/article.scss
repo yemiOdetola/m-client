@@ -97,4 +97,20 @@
             font-size: 1rem;
         }
     }
+    .new-comment {
+        textarea {
+            box-shadow: 0 1px 4px rgba(0,0,0,.03);
+            border: 1px solid rgba(0,0,0,.09);
+            border-radius: 0.25rem;
+            width: 98%;
+            padding: 1rem;
+            @media(min-width: 968px) {
+                width: 80%;
+                padding: 0.75rem 1.25rem;
+            }
+            &:active, &:focus {
+                outline: none;
+            }
+        }
+    }
 }
