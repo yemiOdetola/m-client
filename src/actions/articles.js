@@ -1,4 +1,4 @@
-import { FETCH_ARTICLES, FETCH_ARTICLE, FETCH_TAGS, INITIALIZED, ERROR, COMPLETED, CLEAR } from '../actions/action-constants';
+import { FETCH_ARTICLES, FETCH_ARTICLE, FETCH_TAGS, COMMENTS, INITIALIZED, ERROR, COMPLETED, CLEAR } from '../actions/action-constants';
 import axios from 'axios';
 import globals from '../globals';
 
@@ -13,7 +13,7 @@ export function fetchArticles() {
                     alert(response.status);
                     return console.log(response, 'not successful');
                 }
-                const payload = response.data;
+                const payload = response.data.articles;
                 dispatch(allArticles(payload))
             })
     }
@@ -29,7 +29,6 @@ export function fetchArticle(id) {
                     return console.log(response, 'not successful');
                 }
                 const article = response.data.article;
-                console.log('retrieved article details', article)
                 dispatch(singleArticle(article));
             })
     }
@@ -49,7 +48,6 @@ export function addToFavorites(articleId, payload) {
                     dispatch(error());
                     return console.log(response, 'not successful');
                 }
-                // fetchArticle(articleId);
                 dispatch(completed());
             })
             .catch(error => {
@@ -73,6 +71,33 @@ export function removeFromFavorites(articleId) {
                     dispatch(error());
                     return console.log(response, 'not successful');
                 }
+                dispatch(completed());
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
+export function fetchComments(articleId) {
+    const userToken = localStorage.getItem('mcUserToken');
+    return dispatch => {
+        dispatch(initialized());
+        axios
+            .get(`${url}/article/${articleId}/comments`, {
+                headers: {
+                    'Authorization': userToken
+                }
+            })
+            .then(response => {
+                if (response.success === false) {
+                    dispatch(error());
+                    return console.log(response, 'not successful');
+                }
+                const res = response.data;
+                console.log(res)
+                dispatch(comments(res.comments))
                 dispatch(completed());
             })
             .catch(error => {
@@ -114,6 +139,13 @@ function singleArticle(article) {
 function allArticles(payload) {
     return {
         type: FETCH_ARTICLES,
+        payload
+    }
+}
+
+function comments(payload) {
+    return {
+        type: COMMENTS,
         payload
     }
 }

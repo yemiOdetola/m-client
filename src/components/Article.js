@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import globals from '../globals';
 import Header from './layouts/Header';
 import Loader from './utils/Loader';
 import '../assets/styles/components/article.scss';
-import { fetchArticle, addToFavorites, removeFromFavorites } from '../actions/articles';
+import { fetchArticle, addToFavorites, removeFromFavorites, fetchComments } from '../actions/articles';
 
 
 export class Article extends Component {
@@ -20,6 +21,7 @@ export class Article extends Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         this.props.fetchArticle(id);
+        this.props.fetchComments(id);
         this.setState({ id });
     }
 
@@ -40,6 +42,10 @@ export class Article extends Component {
         }, 100);
     }
 
+    deleteComment = (id) => {
+        this.props.deleteComment(id);
+    }
+
     commentFocus = () => {
         this.setState({ rows: 4 })
     }
@@ -50,6 +56,25 @@ export class Article extends Component {
 
     render() {
         if (!this.props.article.author) return <Loader loading={this.state.loading} />
+        let comments = [];
+        if (this.props.comments[0] && this.props.comments[0].length > 0) {
+            this.props.comments[0].forEach((comment, i) => {
+                comments.push(
+                    <div key={i} className="comment">
+                        <div className="delete" onClick={() => this.deleteComment(comment._id)}>
+                                <img src={require('../assets/images/trash.svg')} alt="#"/>
+                            </div>
+                        <div className="body">{comment.body}</div>
+                        <div className="author">
+                            <img src={comment.author.avatar || require('../assets/images/menu.svg')} alt="author" />
+                            <div className="user">
+                                <Link to={`/user/${comment.author._id}`} className="name">{comment.author.name}</Link>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })
+        }
         return (
             <>
                 <Loader loading={this.props.initiated} />
@@ -84,16 +109,17 @@ export class Article extends Component {
                         <h2 className="component-heading1">Comments</h2>
                         <div className="new-comment">
                             <form onSubmit={this.submitForm}>
-                                <textarea 
+                                <textarea
                                     className={this.state.rows > 1 ? "slide-in" : ''}
-                                    placeholder={`Write a comment @${this.props.article.author.username}`}
+                                    placeholder={`Write a comment @${this.props.userDetails.username}`}
                                     rows={this.state.rows}
                                     onFocus={this.commentFocus}
                                     onBlur={this.commentBlur}></textarea>
+                                <button type="submit" className={this.state.rows > 1 ? 'ml-auto mr-3 slide-in bttn primary' : 'hide'} onClick={this.submitForm}>Submit</button>
                             </form>
                         </div>
                         <div className="comments">
-
+                            {comments}
                         </div>
                     </div>
                 </div>
@@ -107,10 +133,14 @@ Article.prototypes = {
     fetchArticle: PropTypes.func.isRequired
 }
 
+const mapDispatch = {
+    fetchArticle, addToFavorites, removeFromFavorites, fetchComments
+}
 const mapstateToProps = state => ({
     article: state.articles.article,
     userDetails: state.auth.userDetails,
-    initiated: state.articles.initiated
+    initiated: state.articles.initiated,
+    comments: state.articles.comments
 })
 
-export default connect(mapstateToProps, { fetchArticle, removeFromFavorites, addToFavorites })(Article);
+export default connect(mapstateToProps, mapDispatch)(Article);

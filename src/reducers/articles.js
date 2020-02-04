@@ -1,7 +1,8 @@
-import { FETCH_ARTICLES, FETCH_ARTICLE, FETCH_TAGS, CLEAR, INITIALIZED, ERROR, COMPLETED } from '../actions/action-constants';
+import { FETCH_ARTICLES, FETCH_ARTICLE, FETCH_TAGS, COMMENTS, CLEAR, INITIALIZED, ERROR, COMPLETED } from '../actions/action-constants';
 
 const initialState = {
     articles: [],
+    comments: [],
     article: {},
     tags: [],
     initialized: false,
@@ -14,40 +15,45 @@ export default function articles(state = initialState, action) {
         case FETCH_ARTICLES:
             return {
                 ...state,
-                articles: action.payload.articles
+                articles: [...state.articles, action.payload],
             }
         case FETCH_ARTICLE:
             return {
                 ...state,
-                article: action.article
+                article: action.article,
+            }
+        case COMMENTS:
+            return {
+                ...state,
+                comments: [...state.comments, action.payload]
             }
         case FETCH_TAGS:
             return {
                 ...state,
-                tags: action.payload.tags
+                tags: [...state.tags, action.payload.tags],
             }
         case INITIALIZED:
             return {
                 ...state,
-                initialized: true
+                initialized: true,
             }
         case ERROR:
             return {
                 ...state,
                 error: true,
-                initialized: false
+                initialized: false,
             }
         case COMPLETED:
             return {
                 ...state,
                 completed: true,
-                initialized: false
+                initialized: false,
             }
         case CLEAR:
             return {
                 ...state,
                 article: {},
-                articles: []
+                articles: [],
             }
         default:
             return state;

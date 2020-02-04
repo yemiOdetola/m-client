@@ -8,3 +8,4 @@ export const FETCH_ARTICLES  = 'FETCH_ARTICLES';
 export const SIGN_UP  = 'SIGN_UP';
 export const LOGIN  = 'LOGIN';
 export const USER_DETAILS = 'USER_DETAILS';
+export const COMMENTS = 'COMMENTS';

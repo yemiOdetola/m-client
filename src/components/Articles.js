@@ -31,7 +31,7 @@ export class Articles extends Component {
     render() {
         if (!this.props.articles[0]) return <Loader loading={this.state.loading} />
         const articles = [];
-        this.props.articles.forEach((article, index) => {
+        this.props.articles[0].forEach((article, index) => {
             articles.push(
                 <article className="article" key={index}>
                     <div className="feature-img">
