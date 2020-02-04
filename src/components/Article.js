@@ -6,16 +6,17 @@ import globals from '../globals';
 import Header from './layouts/Header';
 import Loader from './utils/Loader';
 import '../assets/styles/components/article.scss';
-import { fetchArticle, addToFavorites, removeFromFavorites, fetchComments } from '../actions/articles';
+import { fetchArticle, addToFavorites, removeFromFavorites, fetchComments, removeComment, writeComment } from '../actions/articles';
 
 
 export class Article extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: false,
+            loading: true,
             id: '',
             rows: 1,
+            comment: ''
         }
     }
     componentDidMount() {
@@ -43,7 +44,25 @@ export class Article extends Component {
     }
 
     deleteComment = (id) => {
-        this.props.deleteComment(id);
+        const payload = {
+            comment_id: id
+        }
+        this.props.removeComment(this.state.id, payload);
+    }
+
+    submitForm = (e) => {
+        e.preventDefault();
+        const payload = {
+            body: this.state.comment,
+            author: this.props.article.author._id,
+            article: this.state.id
+        }
+        this.props.writeComment(payload);
+        setTimeout(() => {
+            this.setState({
+                comment: ''
+            })
+        }, 500)
     }
 
     commentFocus = () => {
@@ -61,9 +80,9 @@ export class Article extends Component {
             this.props.comments[0].forEach((comment, i) => {
                 comments.push(
                     <div key={i} className="comment">
-                        <div className="delete" onClick={() => this.deleteComment(comment._id)}>
-                                <img src={require('../assets/images/trash.svg')} alt="#"/>
-                            </div>
+                        {/* <div className="delete" onClick={() => this.deleteComment(comment._id)}>
+                            <img src={require('../assets/images/trash.svg')} alt="#" />
+                        </div> */}
                         <div className="body">{comment.body}</div>
                         <div className="author">
                             <img src={comment.author.avatar || require('../assets/images/menu.svg')} alt="author" />
@@ -108,14 +127,15 @@ export class Article extends Component {
                     <div className="body">
                         <h2 className="component-heading1">Comments</h2>
                         <div className="new-comment">
-                            <form onSubmit={this.submitForm}>
+                            <form>
                                 <textarea
                                     className={this.state.rows > 1 ? "slide-in" : ''}
                                     placeholder={`Write a comment @${this.props.userDetails.username}`}
                                     rows={this.state.rows}
-                                    onFocus={this.commentFocus}
-                                    onBlur={this.commentBlur}></textarea>
-                                <button type="submit" className={this.state.rows > 1 ? 'ml-auto mr-3 slide-in bttn primary' : 'hide'} onClick={this.submitForm}>Submit</button>
+                                    value={this.state.comment}
+                                    onChange={(e) => this.setState({ comment: e.target.value })}
+                                    onFocus={this.commentFocus}></textarea>
+                                <button type="click" className='ml-auto mr-3 slide-in bttn primary' onClick={this.submitForm}>Submit</button>
                             </form>
                         </div>
                         <div className="comments">
@@ -134,7 +154,7 @@ Article.prototypes = {
 }
 
 const mapDispatch = {
-    fetchArticle, addToFavorites, removeFromFavorites, fetchComments
+    fetchArticle, addToFavorites, removeFromFavorites, fetchComments, removeComment, writeComment
 }
 const mapstateToProps = state => ({
     article: state.articles.article,

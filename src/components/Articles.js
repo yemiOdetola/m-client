@@ -13,7 +13,8 @@ export class Articles extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bookmark: false
+            bookmark: false,
+            loading: true
         }
     }
 

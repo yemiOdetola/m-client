@@ -85,7 +85,35 @@ export function fetchComments(articleId) {
     return dispatch => {
         dispatch(initialized());
         axios
-            .get(`${url}/article/${articleId}/comments`, {
+        .get(`${url}/article/${articleId}/comments`, {
+            headers: {
+                'Authorization': userToken
+            }
+        })
+        .then(response => {
+            if (response.success === false) {
+                dispatch(error());
+                return console.log(response, 'not successful');
+            }
+            const res = response.data;
+            console.log(res)
+                dispatch(clear())
+                dispatch(completed());
+                dispatch(comments(res.comments))
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
+export function removeComment(articleId, payload) {
+    const userToken = localStorage.getItem('mcUserToken');
+    return dispatch => {
+        dispatch(initialized());
+        axios
+            .delete(`${url}/article/${articleId}/comment`, payload, {
                 headers: {
                     'Authorization': userToken
                 }
@@ -95,10 +123,8 @@ export function fetchComments(articleId) {
                     dispatch(error());
                     return console.log(response, 'not successful');
                 }
-                const res = response.data;
-                console.log(res)
-                dispatch(comments(res.comments))
                 dispatch(completed());
+                this.fetchComments(articleId);
             })
             .catch(error => {
                 console.log('catch error register', error);
@@ -106,6 +132,31 @@ export function fetchComments(articleId) {
             })
     }
 }
+
+
+export function writeComment(payload) {
+    const userToken = localStorage.getItem('mcUserToken');
+    return dispatch => {
+        axios
+            .post(`${url}/article/${payload.article}/comment`, payload, {
+                headers: {
+                    'Authorization': userToken
+                }
+            })
+            .then(response => {
+                if (response.success === false) {
+                    dispatch(error());
+                    return console.log(response, 'not successful');
+                }
+                this.fetchComments(payload.article);
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
 
 export function fetchTags() {
     return (dispatch) => {
