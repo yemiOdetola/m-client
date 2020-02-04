@@ -1,4 +1,5 @@
 const globals = {
+    BASE_URL: 'http://localhost:5000/api',
     capitalize: function (str) {
         if (typeof str !== 'string') {
             return '';

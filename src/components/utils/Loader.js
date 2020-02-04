@@ -5,7 +5,7 @@ export default function Loader({loading}) {
   return (
     <>
     <div className={loading ? "loader-cover" : 'hide'}>
-      <div className='lds-ripple'><div></div><div></div></div>
+      <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
     </div>
     </>
   )

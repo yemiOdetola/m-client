@@ -13,8 +13,7 @@ export class Articles extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bookmark: false,
-            userId: '5ddba1c9ba0b85579c87b474'
+            bookmark: false
         }
     }
 
@@ -30,7 +29,7 @@ export class Articles extends Component {
     }
 
     render() {
-        if (!this.props.articles[0]) return <Loader loading={this.state.loading}/>
+        if (!this.props.articles[0]) return <Loader loading={this.state.loading} />
         const articles = [];
         this.props.articles.forEach((article, index) => {
             articles.push(
@@ -53,13 +52,13 @@ export class Articles extends Component {
                             </div>
                             <div className="actions">
                                 <img src={require('../assets/images/unbookmark.svg')}
-                                    className={globals.checkFavorite(article.favorites, this.state.userId) ? 'hide' : 'favorite'} onClick={this.toggleToggle} alt="" />
+                                    className={globals.checkFavorite(article.favorites, this.props.userDetails._id) ? 'hide' : 'favorite'} onClick={this.toggleFavorite} alt="" />
                                 <img src={require('../assets/images/bookmarked.svg')}
-                                    className={globals.checkFavorite(article.favorites, this.state.userId) ? 'favorite' : 'hide'} onClick={this.toggleToggle} alt="" />
+                                    className={globals.checkFavorite(article.favorites, this.props.userDetails._id) ? 'favorite' : 'hide'} onClick={this.toggleFavorite} alt="" />
                             </div>
                         </div>
                     </div>
-                </article >
+                </article>
             )
         })
         return (
@@ -151,7 +150,7 @@ Articles.propTypes = {
 
 const mapstateToProps = state => ({
     articles: state.articles.articles,
-    user: state.auth.user
+    userDetails: state.auth.userDetails
 })
 
 export default connect(mapstateToProps, { fetchArticles })(Articles)

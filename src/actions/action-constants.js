@@ -1,6 +1,10 @@
-export const FETCH_ARTICLES  = 'FETCH_ARTICLES';
+export const CLEAR = 'CLEAR';
+export const INITIALIZED = 'INITIALIZED';
+export const ERROR = 'ERROR';
+export const COMPLETED = 'COMPLETED';
 export const FETCH_ARTICLE  = 'FETCH_ARTICLE'; 
 export const FETCH_TAGS  = 'FETCH_TAGS';
+export const FETCH_ARTICLES  = 'FETCH_ARTICLES';
 export const SIGN_UP  = 'SIGN_UP';
 export const LOGIN  = 'LOGIN';
-export const TOGGLE_ACTIVE = 'TOGGLE_ACTIVE';
+export const USER_DETAILS = 'USER_DETAILS';

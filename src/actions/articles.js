@@ -1,11 +1,13 @@
-import { FETCH_ARTICLES, FETCH_ARTICLE, FETCH_TAGS } from '../actions/action-constants';
+import { FETCH_ARTICLES, FETCH_ARTICLE, FETCH_TAGS, INITIALIZED, ERROR, COMPLETED, CLEAR } from '../actions/action-constants';
 import axios from 'axios';
+import globals from '../globals';
 
-const url = `http://localhost:5000/api`;
+const url = `${globals.BASE_URL}/articles`;
 
 export function fetchArticles() {
     return (dispatch) => {
-        axios.get(`${url}/articles/all`)
+        dispatch(clear());
+        axios.get(`${url}/all`)
             .then(response => {
                 if (response.data.success === false) {
                     alert(response.status);
@@ -19,7 +21,8 @@ export function fetchArticles() {
 
 export function fetchArticle(id) {
     return (dispatch) => {
-        axios.get(`${url}/articles/article/${id}`)
+        dispatch(clear());
+        axios.get(`${url}/article/${id}`)
             .then(response => {
                 if (response.data.success === false) {
                     alert(response.status);
@@ -27,13 +30,61 @@ export function fetchArticle(id) {
                 }
                 const article = response.data.article;
                 console.log('retrieved article details', article)
-                dispatch(singleArticle(article))
+                dispatch(singleArticle(article));
+            })
+    }
+}
+
+export function addToFavorites(articleId, payload) {
+    const userToken = localStorage.getItem('mcUserToken');
+    return dispatch => {
+        dispatch(initialized());
+        axios.post(`${url}/article/${articleId}/updateFavorites`, payload, {
+            headers: {
+                'Authorization': userToken
+            }
+        })
+            .then(response => {
+                if (response.success === false) {
+                    dispatch(error());
+                    return console.log(response, 'not successful');
+                }
+                // fetchArticle(articleId);
+                dispatch(completed());
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
+export function removeFromFavorites(articleId) {
+    const userToken = localStorage.getItem('mcUserToken');
+    return dispatch => {
+        dispatch(initialized());
+        axios.post(`${url}/article/${articleId}/removeFavorites`, {}, {
+            headers: {
+                'Authorization': userToken
+            }
+        })
+            .then(response => {
+                if (response.success === false) {
+                    dispatch(error());
+                    return console.log(response, 'not successful');
+                }
+                dispatch(completed());
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
             })
     }
 }
 
 export function fetchTags() {
     return (dispatch) => {
+        dispatch(clear());
         axios.get(`${url}/tags/all`)
             .then(response => {
                 if (response.data.success === false) {
@@ -45,7 +96,6 @@ export function fetchTags() {
             })
     }
 }
-
 
 function allTags(payload) {
     return {
@@ -68,3 +118,30 @@ function allArticles(payload) {
     }
 }
 
+function initialized() {
+    return {
+        type: INITIALIZED,
+        payload: ''
+    }
+}
+
+function error() {
+    return {
+        type: ERROR,
+        payload: ''
+    }
+}
+
+function completed() {
+    return {
+        type: COMPLETED,
+        payload: ''
+    }
+}
+
+function clear() {
+    return {
+        type: CLEAR,
+        payload: ''
+    }
+}

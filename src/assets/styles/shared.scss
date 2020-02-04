@@ -11,7 +11,7 @@ body {
 
 //-------------------   utils  start  -------------------
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .component-heading1 {
@@ -131,9 +131,10 @@ body {
         background-color: #C2FFEC;
         color: #333;
     }
-    &.danger {
-        background-color: rgb(255, 68, 68);
-        color: #FFF;
+    &.danger-pill {
+        background: none;
+        border: 1px solid #ff0909;
+        color: #ff0909;
     }
     &.plain {
         color: #01BA82;

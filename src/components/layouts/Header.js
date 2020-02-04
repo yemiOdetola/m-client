@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../../assets/styles/layouts/header.scss';
 import '../../assets/styles/shared.scss';
+import { profileDetails } from '../../actions/auth';
 
 export class Header extends Component {
     constructor(props) {
@@ -13,11 +14,19 @@ export class Header extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.user);
+        if (!this.props.userDetails.username) {
+            this.props.profileDetails();
+        }
+        console.log(this.props.userDetails);
+    }
+
+    logout = () => {
+        localStorage.setItem('mcUserToken', '');
+        window.location.reload();
     }
 
     toggleMenu = () => {
-        this.setState({open: !this.state.open})
+        this.setState({ open: !this.state.open })
     }
 
     render() {
@@ -34,10 +43,13 @@ export class Header extends Component {
                             <nav className="menu">
                                 <div className="each-menu text">Account</div>
                                 <div className="each-menu text">Account</div>
-                                <div className="each-menu text">Account</div>
-                                <div className="each-menu text">Account</div>
-                                <button type="button" className="bttn dye small">login</button>
-                                <button type="button" className="bttn danger ml-2 small">logout</button>
+                                {this.props.userDetails._id ?
+                                    <div className="user">
+                                        <span>Hi, {this.props.userDetails.username}</span>
+                                        <button type="button" className="bttn danger-pill ml-2 small" onClick={this.logout}>logout</button>
+                                    </div>
+                                    : <button type="button" className="bttn dye small"><Link to="/login">login</Link></button>
+                                }
                             </nav>
                         </div>
                         <div className="mobile-menu">
@@ -53,10 +65,13 @@ export class Header extends Component {
                         <div className={this.state.open ? "menu-items slide-in" : 'hide'}>
                             <div className="each">item</div>
                             <div className="each">item</div>
-                            <div className="each">item</div>
-                            <div className="each">item</div>
-                            <button type="button" className="bttn dye small">Login</button>
-                                <button type="button" className="bttn danger mt-2 small">logout</button>
+                            {this.props.userDetails._id ?
+                                <div className="user">
+                                    <span>Hi, {this.props.userDetails.username}</span>
+                                    <button type="button" className="bttn danger-pill ml-2 small" onClick={this.logout}>logout</button>
+                                </div>
+                                : <button type="button" className="bttn dye small"><Link to="/login">login</Link></button>
+                            }
                         </div>
                     </header>
                 </div>
@@ -66,7 +81,7 @@ export class Header extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    user: state.auth.user
+    userDetails: state.auth.userDetails
 })
 
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps, { profileDetails })(Header);

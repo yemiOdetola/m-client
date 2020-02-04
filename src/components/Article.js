@@ -1,29 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Header from './layouts/Header';
-import { fetchArticle } from '../actions/articles';
 import globals from '../globals';
-import '../assets/styles/components/article.scss';
+import Header from './layouts/Header';
 import Loader from './utils/Loader';
+import '../assets/styles/components/article.scss';
+import { fetchArticle, addToFavorites, removeFromFavorites } from '../actions/articles';
 
 
 export class Article extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId: '5ddba1c9ba0b85579c87b474',
-            loading: true
+            loading: false,
+            id: '',
         }
     }
     componentDidMount() {
         const id = this.props.match.params.id;
         this.props.fetchArticle(id);
+        this.setState({ id });
     }
+
+    addToFav = () => {
+        const payload = {
+            userId: this.props.article.author._id
+        }
+        this.props.addToFavorites(this.state.id, payload);
+        setTimeout(() => {
+            window.location.reload();
+        }, 100);
+    }
+
+    removeFromFav = () => {
+        this.props.removeFromFavorites(this.state.id);
+        setTimeout(() => {
+            window.location.reload();
+        }, 100);
+    }
+
     render() {
-        if (!this.props.article.author) return <Loader loading={this.state.loading}/>
+        if (!this.props.article.author) return <Loader loading={this.state.loading} />
         return (
             <>
+                <Loader loading={this.props.initiated} />
                 <Header />
                 <div className="article-component component-spacing">
                     <h1 className="title">{this.props.article.title}</h1>
@@ -41,9 +61,9 @@ export class Article extends Component {
                             <img src={require('../assets/images/facebook.svg')} alt="facebook share" />
                             <img src={require('../assets/images/twitter.svg')} alt="twitter share" />
                             <img src={require('../assets/images/unbookmark.svg')}
-                                className={globals.checkFavorite(this.props.article.favorites, this.state.userId) ? 'hide' : 'favorite'} alt="" />
+                                className={globals.checkFavorite(this.props.article.favorites, this.props.userDetails._id) ? 'hide' : 'favorite'} onClick={this.addToFav} alt="" />
                             <img src={require('../assets/images/bookmarked.svg')}
-                                className={globals.checkFavorite(this.props.article.favorites, this.state.userId) ? 'favorite' : 'hide'} alt="" />
+                                className={globals.checkFavorite(this.props.article.favorites, this.props.userDetails._id) ? 'favorite' : 'hide'} onClick={this.removeFromFav} alt="" />
                         </div>
                     </div>
                     <figure className="feature-img">
@@ -51,7 +71,6 @@ export class Article extends Component {
                     </figure>
                     <div className="description">{this.props.article.description}</div>
                     <div className="body">{this.props.article.body}</div>
-
                 </div>
             </>
         )
@@ -64,7 +83,9 @@ Article.prototypes = {
 }
 
 const mapstateToProps = state => ({
-    article: state.articles.article
+    article: state.articles.article,
+    userDetails: state.auth.userDetails,
+    initiated: state.articles.initiated
 })
 
-export default connect(mapstateToProps, { fetchArticle })(Article);
+export default connect(mapstateToProps, { fetchArticle, removeFromFavorites, addToFavorites })(Article);

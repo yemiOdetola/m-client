@@ -1,9 +1,7 @@
-import { LOGIN, SIGN_UP } from '../actions/action-constants';
+import { LOGIN, SIGN_UP, USER_DETAILS } from '../actions/action-constants';
 import axios from 'axios';
-
-// const userToken = localStorage.getItem('userToken');
-// const local = true;
-const url = `http://localhost:5000/api/users`;
+import globals from '../globals';
+const url = `${globals.BASE_URL}/users`;
 
 export function register(props, payload) {
     return (dispatch) => {
@@ -44,6 +42,28 @@ export function login(props, payload) {
     }
 }
 
+export function profileDetails() {
+    const userToken = localStorage.getItem('mcUserToken');
+    return dispatch => {
+        axios.get(`${url}/profile`, {
+            headers: {
+                'Authorization': userToken
+            }
+        })
+            .then(response => {
+                if (response.success === false) {
+                    return console.log(response, 'not successful');
+                }
+                const res = response.data;
+                dispatch(user(res.user));
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
 function saveUserAuth(data) {
     return {
         type: LOGIN,
@@ -51,9 +71,16 @@ function saveUserAuth(data) {
     };
 }
 
-function profileCreated(user) {
+function profileCreated(data) {
     return {
         type: SIGN_UP,
-        payload: user
+        payload: data
     }
+}
+
+function user(data) {
+    return {
+        type: USER_DETAILS,
+        payload: data
+    };
 }
