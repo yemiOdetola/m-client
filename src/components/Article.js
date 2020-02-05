@@ -47,11 +47,15 @@ export class Article extends Component {
         const payload = {
             comment_id: id
         }
+        console.log(payload);
         this.props.removeComment(this.state.id, payload);
     }
 
     submitForm = (e) => {
         e.preventDefault();
+        if(this.state.comment === '') {
+            return;
+        } 
         const payload = {
             body: this.state.comment,
             author: this.props.article.author._id,
@@ -80,9 +84,9 @@ export class Article extends Component {
             this.props.comments[0].forEach((comment, i) => {
                 comments.push(
                     <div key={i} className="comment">
-                        {/* <div className="delete" onClick={() => this.deleteComment(comment._id)}>
+                        <div className="delete" onClick={() => this.deleteComment(comment._id)}>
                             <img src={require('../assets/images/trash.svg')} alt="#" />
-                        </div> */}
+                        </div>
                         <div className="body">{comment.body}</div>
                         <div className="author">
                             <img src={comment.author.avatar || require('../assets/images/menu.svg')} alt="author" />
@@ -96,7 +100,6 @@ export class Article extends Component {
         }
         return (
             <>
-                <Loader loading={this.props.initiated} />
                 <Header />
                 <div className="article-component component-spacing">
                     <h1 className="title">{this.props.article.title}</h1>
@@ -135,7 +138,13 @@ export class Article extends Component {
                                     value={this.state.comment}
                                     onChange={(e) => this.setState({ comment: e.target.value })}
                                     onFocus={this.commentFocus}></textarea>
-                                <button type="click" className='ml-auto mr-3 slide-in bttn primary' onClick={this.submitForm}>Submit</button>
+                                <button
+                                    type="click"
+                                    disabled={this.props.initialized}
+                                    className='ml-auto mr-3 slide-in bttn primary'
+                                    onClick={this.submitForm}>Submit
+                                    <span className={this.props.initialized ? "loader" : 'hide'}></span>
+                                </button>
                             </form>
                         </div>
                         <div className="comments">
@@ -159,7 +168,7 @@ const mapDispatch = {
 const mapstateToProps = state => ({
     article: state.articles.article,
     userDetails: state.auth.userDetails,
-    initiated: state.articles.initiated,
+    initialized: state.articles.initialized,
     comments: state.articles.comments
 })
 

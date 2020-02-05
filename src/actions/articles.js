@@ -111,9 +111,9 @@ export function fetchComments(articleId) {
 export function removeComment(articleId, payload) {
     const userToken = localStorage.getItem('mcUserToken');
     return dispatch => {
-        dispatch(initialized());
+        // dispatch(initialized());
         axios
-            .delete(`${url}/article/${articleId}/comment`, payload, {
+            .post(`${url}/article/${articleId}/${payload.comment_id}`, payload, {
                 headers: {
                     'Authorization': userToken
                 }
