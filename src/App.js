@@ -5,6 +5,7 @@ import Articles from './components/Articles';
 import Register from './components/Register';
 import Article from './components/Article';
 import Login from './components/Login';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path='/articles' component={Articles} />
       <Route path='/register' component={Register} />
       <Route path='/login' component={Login} />
+      <Route path='/user/:id' component={Profile} />
       <Route path='**' component={Landing}/>
     </Switch>
   );

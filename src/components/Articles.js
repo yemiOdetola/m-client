@@ -49,7 +49,7 @@ export class Articles extends Component {
                         <div className="description"> <Link to={`/article/${article._id}`}>{globals.trimSubtitle(article.description)}</Link></div>
                         <div className="others">
                             <div className="author-time">
-                                <div className="info author">by <Link to="/user/">{article.author.username}</Link> on {globals.converToLocal(article.createdAt)}</div>
+                                <div className="info author">by <Link to={`/user/${article.author._id}`}>{article.author.username}</Link> on {globals.converToLocal(article.createdAt)}</div>
                             </div>
                             <div className="actions">
                                 <img src={require('../assets/images/unbookmark.svg')}

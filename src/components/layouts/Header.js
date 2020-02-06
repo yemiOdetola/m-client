@@ -45,7 +45,7 @@ export class Header extends Component {
                                 <div className="each-menu text">Account</div>
                                 {this.props.userDetails._id ?
                                     <div className="user">
-                                        <span>Hi, {this.props.userDetails.username}</span>
+                                        <Link to={`/user/${this.props.userDetails._id}`}>Hi, {this.props.userDetails.username}</Link>
                                         <button type="button" className="bttn danger-pill ml-2 small" onClick={this.logout}>logout</button>
                                     </div>
                                     : <button type="button" className="bttn dye small"><Link to="/login">login</Link></button>
@@ -67,7 +67,7 @@ export class Header extends Component {
                             <div className="each">item</div>
                             {this.props.userDetails._id ?
                                 <div className="user">
-                                    <span>Hi, {this.props.userDetails.username}</span>
+                                    <Link to={`/user/${this.props.userDetails._id}`}>Hi, {this.props.userDetails.username}</Link>
                                     <button type="button" className="bttn danger-pill ml-2 small" onClick={this.logout}>logout</button>
                                 </div>
                                 : <button type="button" className="bttn dye small"><Link to="/login">login</Link></button>

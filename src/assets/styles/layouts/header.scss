@@ -57,8 +57,9 @@
         display: flex;
         justify-content: flex-start;
     }
-    span {
+    a {
         display: block;
+        text-decoration: underline;
         margin-right: 1rem;
         color: #222222;
         font-size: 0.875rem;

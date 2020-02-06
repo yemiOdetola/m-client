@@ -109,7 +109,7 @@ export class Article extends Component {
                                 <img src={this.props.article.author.avatar} alt="" />
                             </div>
                             <div className="others">
-                                <div className="name">{this.props.article.author.name}</div>
+                                <Link to={`/user/${this.props.article.author._id}`} className="name">{this.props.article.author.name}</Link>
                                 <div className="follow"><button className="bttn small actions">follow</button></div>
                             </div>
                         </div>
@@ -128,8 +128,8 @@ export class Article extends Component {
                     <div className="description">{this.props.article.description}</div>
                     <div className="body">{this.props.article.body}</div>
                     <div className="body">
-                        <h2 className="component-heading1">Comments</h2>
                         <div className="new-comment">
+                        <h2 className="component-heading1 mb-4">Comments</h2>
                             <form>
                                 <textarea
                                     className={this.state.rows > 1 ? "slide-in" : ''}
