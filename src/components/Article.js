@@ -9,12 +9,14 @@ import '../assets/styles/components/article.scss';
 import {
     fetchArticle,
     addToFavorites,
+    updateUserFav,
     removeFromFavorites,
     fetchComments,
     removeComment,
     writeComment,
 } from '../actions/articles';
 import { followUser, unfollowUser } from '../actions/utils';
+import { profileDetails } from '../actions/auth';
 
 
 export class Article extends Component {
@@ -30,6 +32,7 @@ export class Article extends Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         this.props.fetchArticle(id);
+        // this.props.profileDetails();
         this.props.fetchComments(id);
         this.setState({ id });
     }
@@ -52,19 +55,14 @@ export class Article extends Component {
 
     addToFav = () => {
         const payload = {
-            userId: this.props.article.author._id
+            userId: this.props.userDetails._id
         }
+        this.props.updateUserFav(this.state.id, payload);
         this.props.addToFavorites(this.state.id, payload);
-        setTimeout(() => {
-            window.location.reload();
-        }, 100);
     }
 
     removeFromFav = () => {
         this.props.removeFromFavorites(this.state.id);
-        setTimeout(() => {
-            window.location.reload();
-        }, 100);
     }
 
     deleteComment = (id) => {
@@ -137,8 +135,10 @@ export class Article extends Component {
                                 {this.props.userDetails.name ?
                                     <div className="follow">
                                         {globals.checkFans(this.props.userDetails.following, this.props.article.author._id)
-                                            ? <button onClick={() => this.unfollow(this.props.article.author._id)} className="bttn small danger-pill">unfollow</button>
-                                            : <button onClick={() => this.follow(this.props.article.author._id)} className="bttn small actions">follow</button>
+                                            ? <button onClick={() => this.unfollow(this.props.article.author._id)}
+                                                className="bttn small danger-pill">unfollow</button>
+                                            : <button onClick={() => this.follow(this.props.article.author._id)}
+                                                className="bttn small actions">follow</button>
                                         }
                                     </div>
                                     : ''
@@ -149,9 +149,13 @@ export class Article extends Component {
                             <img src={require('../assets/images/facebook.svg')} alt="facebook share" />
                             <img src={require('../assets/images/twitter.svg')} alt="twitter share" />
                             <img src={require('../assets/images/unbookmark.svg')}
-                                className={globals.checkFavorite(this.props.article.favorites, this.props.userDetails._id) ? 'hide' : 'favorite'} onClick={this.addToFav} alt="" />
+                                className={globals.checkFavorite(this.props.article.favorites, this.props.userDetails._id)
+                                    ? 'hide' : 'favorite'}
+                                onClick={this.addToFav} alt="" />
                             <img src={require('../assets/images/bookmarked.svg')}
-                                className={globals.checkFavorite(this.props.article.favorites, this.props.userDetails._id) ? 'favorite' : 'hide'} onClick={this.removeFromFav} alt="" />
+                                className={globals.checkFavorite(this.props.article.favorites, this.props.userDetails._id)
+                                    ? 'favorite' : 'hide'}
+                                onClick={this.removeFromFav} alt="" />
                         </div>
                     </div>
                     <figure className="feature-img">
@@ -197,12 +201,14 @@ Article.prototypes = {
 const mapDispatch = {
     fetchArticle,
     addToFavorites,
+    updateUserFav,
     removeFromFavorites,
     fetchComments,
     removeComment,
     writeComment,
     followUser,
-    unfollowUser
+    unfollowUser,
+    profileDetails
 }
 const mapstateToProps = state => ({
     article: state.articles.article,

@@ -5,7 +5,7 @@ import '../assets/styles/components/articles.scss';
 import '../assets/styles/shared.scss';
 import Header from './layouts/Header';
 import PropTypes from 'prop-types';
-import { fetchArticles } from '../actions/articles';
+import { fetchArticles, addToFavorites, updateUserFav, removeFromFavorites } from '../actions/articles';
 import globals from '../globals';
 import Loader from './utils/Loader';
 
@@ -19,8 +19,19 @@ export class Articles extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
         this.props.fetchArticles();
+    }
+
+    addToFav = (id) => {
+        const payload = {
+            userId: this.props.userDetails._id
+        }
+        this.props.updateUserFav(id, payload);
+        this.props.addToFavorites(id, payload);
+    }
+
+    removeFromFav = (id) => {
+        this.props.removeFromFavorites(id);
     }
 
     toggleToggle = () => {
@@ -53,9 +64,13 @@ export class Articles extends Component {
                             </div>
                             <div className="actions">
                                 <img src={require('../assets/images/unbookmark.svg')}
-                                    className={globals.checkFavorite(article.favorites, this.props.userDetails._id) ? 'hide' : 'favorite'} onClick={this.toggleFavorite} alt="" />
+                                    className={globals.checkFavorite(article.favorites, this.props.userDetails._id)
+                                        ? 'hide' : 'favorite'}
+                                    onClick={() => this.addToFav(article._id)} alt="" />
                                 <img src={require('../assets/images/bookmarked.svg')}
-                                    className={globals.checkFavorite(article.favorites, this.props.userDetails._id) ? 'favorite' : 'hide'} onClick={this.toggleFavorite} alt="" />
+                                    className={globals.checkFavorite(article.favorites, this.props.userDetails._id)
+                                        ? 'favorite' : 'hide'}
+                                    onClick={() => this.removeFromFav(article._id)} alt="" />
                             </div>
                         </div>
                     </div>
@@ -154,4 +169,11 @@ const mapstateToProps = state => ({
     userDetails: state.auth.userDetails
 })
 
-export default connect(mapstateToProps, { fetchArticles })(Articles)
+const mapDispatchToProps = {
+    addToFavorites,
+    updateUserFav,
+    removeFromFavorites,
+    fetchArticles,
+}
+
+export default connect(mapstateToProps, mapDispatchToProps)(Articles)

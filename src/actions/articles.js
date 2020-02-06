@@ -111,8 +111,8 @@ export function addToFavorites(articleId, payload) {
                     dispatch(error());
                     return console.log(response, 'not successful');
                 }
-                this.updateUserFav(articleId, payload);
                 dispatch(completed());
+                window.location.reload();
             })
             .catch(error => {
                 console.log('catch error register', error);
@@ -136,6 +136,7 @@ export function removeFromFavorites(articleId) {
                     return console.log(response, 'not successful');
                 }
                 dispatch(completed());
+                window.location.reload();
             })
             .catch(error => {
                 console.log('catch error register', error);

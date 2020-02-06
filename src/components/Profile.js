@@ -7,7 +7,7 @@ import Loader from './utils/Loader';
 import globals from '../globals';
 import '../assets/styles/components/profile.scss';
 import { userFollows } from '../actions/auth';
-import { fetchAuthorized, fetchFavs } from '../actions/articles';
+import { fetchAuthorized, fetchFavs, updateUserFav, addToFavorites, removeFromFavorites } from '../actions/articles';
 import { followUser, unfollowUser } from '../actions/utils';
 
 export class Profile extends Component {
@@ -56,11 +56,6 @@ export class Profile extends Component {
         this.setState({
           user: res
         })
-        if (res.following && res.following.length > 0) {
-          res.following.forEach(f => {
-            this.props.userFollows(f);
-          })
-        }
         if (res.articles && res.articles.length > 0) {
           res.articles.forEach(a => {
             this.props.fetchAuthorized(a);
@@ -69,6 +64,11 @@ export class Profile extends Component {
         if (res.favorites && res.favorites.length > 0) {
           res.favorites.forEach(f => {
             this.props.fetchFavs(f);
+          })
+        }
+        if (res.following && res.following.length > 0) {
+          res.following.forEach(f => {
+            this.props.userFollows(f);
           })
         }
       })
@@ -80,6 +80,18 @@ export class Profile extends Component {
 
   activateMenu = (menu) => {
     this.setState({ active: menu })
+  }
+
+  addToFav = (id) => {
+    const payload = {
+      userId: this.props.userDetails._id
+    }
+    this.props.updateUserFav(id, payload);
+    this.props.addToFavorites(id, payload);
+  }
+
+  removeFromFav = (id) => {
+    this.props.removeFromFavorites(id);
   }
 
 
@@ -115,7 +127,14 @@ export class Profile extends Component {
         favorites.push(
           <div key={i} className="article fav">
             <div className="fav">
-              <img src={require('../assets/images/bookmarked.svg')} alt="#" />
+              <img src={require('../assets/images/unbookmark.svg')}
+                className={globals.checkFavorite(fav.favorites, this.props.userDetails._id)
+                  ? 'hide' : 'favorite'}
+                onClick={() => this.addToFav(fav._id)} alt="" />
+              <img src={require('../assets/images/bookmarked.svg')}
+                className={globals.checkFavorite(fav.favorites, this.props.userDetails._id)
+                  ? 'favorite' : 'hide'}
+                onClick={() => this.removeFromFav(fav._id)} alt="" />
             </div>
             <Link to={`/article/${fav._id}`}>
               <div className="title">{globals.trimTitle(fav.title)}</div>
@@ -246,6 +265,7 @@ export class Profile extends Component {
 
 const mapStateToProps = (state) => ({
   userr: state.auth.userr,
+  userDetails: state.auth.userDetails,
   following: state.auth.following,
   authorized: state.articles.authorized,
   favs: state.articles.favorites,
@@ -256,7 +276,10 @@ const mapDispatchToProps = {
   fetchAuthorized,
   fetchFavs,
   followUser,
-  unfollowUser
+  unfollowUser,
+  updateUserFav,
+  addToFavorites,
+  removeFromFavorites,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
