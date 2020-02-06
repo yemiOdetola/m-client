@@ -28,6 +28,15 @@ const globals = {
             return false;
         }
     },
+    checkFans: function(arr, userId) {
+        if(typeof arr === 'undefined') return false;
+        const followed = arr.filter(user => user === userId);
+        if(typeof followed[0] !== 'undefined') {
+            return true;
+        } else {
+            return false;
+        }
+    },
     converToLocal: function (tzDate) {
         let d = new Date(tzDate);
         const year = d.getFullYear();

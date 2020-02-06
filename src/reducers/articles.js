@@ -1,4 +1,4 @@
-import { 
+import {
     FETCH_ARTICLES,
     FETCH_ARTICLE,
     FETCH_TAGS,
@@ -40,16 +40,16 @@ export default function articles(state = initialState, action) {
                 ...state,
                 comments: [...state.comments, action.payload]
             }
-        case FAVORITES: 
-        return {
-            ...state,
-            favorites: [...state.favorites, action.payload]
-        }
-        case AUTHORIZED: 
-        return {
-            ...state,
-            authorized: [...state.authorized, action.payload]
-        }
+        case FAVORITES:
+            return {
+                ...state,
+                favorites: [...state.favorites, action.payload]
+            }
+        case AUTHORIZED:
+            return {
+                ...state,
+                authorized: [...state.authorized, action.payload]
+            }
         case FETCH_TAGS:
             return {
                 ...state,
@@ -76,6 +76,8 @@ export default function articles(state = initialState, action) {
             return {
                 ...state,
                 comments: [],
+                authorized: [],
+                favorites: [],
             }
         default:
             return state;

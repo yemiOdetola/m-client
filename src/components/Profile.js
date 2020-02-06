@@ -8,6 +8,7 @@ import globals from '../globals';
 import '../assets/styles/components/profile.scss';
 import { userFollows } from '../actions/auth';
 import { fetchAuthorized, fetchFavs } from '../actions/articles';
+import { followUser, unfollowUser } from '../actions/utils';
 
 export class Profile extends Component {
   constructor(props) {
@@ -24,6 +25,22 @@ export class Profile extends Component {
     this.userrr(id);
   }
 
+  follow = (id) => {
+    const payload = {
+      userId: this.props.userDetails._id,
+      accountId: id
+    }
+    this.props.followUser(payload)
+  }
+
+  unfollow = (id) => {
+    const payload = {
+      userId: this.props.userDetails._id,
+      accountId: id
+    }
+    this.props.unfollowUser(payload)
+  }
+
   userrr = (id) => {
     const userToken = localStorage.getItem('mcUserToken');
     axios.get(`${globals.BASE_URL}/users/user/${id}`, {
@@ -36,11 +53,9 @@ export class Profile extends Component {
           return console.log(response, 'not successful');
         }
         const res = response.data.user;
-        console.log(res);
         this.setState({
           user: res
         })
-        console.log(this.state.user);
         if (res.following && res.following.length > 0) {
           res.following.forEach(f => {
             this.props.userFollows(f);
@@ -81,7 +96,15 @@ export class Profile extends Component {
             <div className="content">
               <div className="name">{follow.name}</div>
               <div className="bio">{follow.bio ? follow.bio : '...'}</div>
-              <button className="bttn small danger-pill">unfollow</button>
+              {this.state.user.name ?
+                <>
+                  {globals.checkFans(this.state.user.following, this.state.user._id)
+                    ? <button onClick={() => this.unfollow(follow._id)} className="bttn small danger-pill">unfollow</button>
+                    : <button onClick={() => this.follow(follow._id)} className="bttn small actions">follow</button>
+                  }
+                </>
+                : ''
+              }
             </div>
           </div>
         )
@@ -123,7 +146,7 @@ export class Profile extends Component {
             <div className="profile-card">
               <div className="header"></div>
               <div className="profile-img">
-                <img src={require('../assets/images/rotation.svg')} alt="#" />
+                <img src={this.state.user.avatar ? this.state.user.avatar : require('../assets/images/rotation.svg')} alt="#" />
               </div>
               <div className="stats">
                 <div className="stat">
@@ -186,19 +209,29 @@ export class Profile extends Component {
                 <div className="slide-in">
                   {authorized}
                 </div>
-                : ''}
+                :
+                <>
+                  <div className={this.state.active === 'articles' && !authorized.length ? "empty" : 'hide'}>
+                    <img src={require('../assets/images/empty-ride.svg')} alt="()" />
+                  </div></>
+              }
               {this.state.active === 'following' ?
                 <div className="slide-in">
                   {following}
                 </div>
-                : ''}
+                :
+                <>
+                  <div className={this.state.active === 'following' && !following.length ? "empty" : 'hide'}>
+                    <img src={require('../assets/images/empty-ride.svg')} alt="()" />
+                  </div></>
+              }
               {this.state.active === 'favorites' ?
                 <div className="slide-in">
                   {favorites}
                 </div>
                 :
                 <>
-                  <div className="empty">
+                  <div className={this.state.active === 'favorites' && !favorites.length ? "empty" : 'hide'}>
                     <img src={require('../assets/images/empty-ride.svg')} alt="()" />
                   </div>
                 </>
@@ -222,6 +255,8 @@ const mapDispatchToProps = {
   userFollows,
   fetchAuthorized,
   fetchFavs,
+  followUser,
+  unfollowUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)

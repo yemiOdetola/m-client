@@ -6,7 +6,15 @@ import globals from '../globals';
 import Header from './layouts/Header';
 import Loader from './utils/Loader';
 import '../assets/styles/components/article.scss';
-import { fetchArticle, addToFavorites, removeFromFavorites, fetchComments, removeComment, writeComment } from '../actions/articles';
+import {
+    fetchArticle,
+    addToFavorites,
+    removeFromFavorites,
+    fetchComments,
+    removeComment,
+    writeComment,
+} from '../actions/articles';
+import { followUser, unfollowUser } from '../actions/utils';
 
 
 export class Article extends Component {
@@ -24,6 +32,22 @@ export class Article extends Component {
         this.props.fetchArticle(id);
         this.props.fetchComments(id);
         this.setState({ id });
+    }
+
+    follow = (id) => {
+        const payload = {
+            userId: this.props.userDetails._id,
+            accountId: id
+        }
+        this.props.followUser(payload)
+    }
+
+    unfollow = (id) => {
+        const payload = {
+            userId: this.props.userDetails._id,
+            accountId: id
+        }
+        this.props.unfollowUser(payload)
     }
 
     addToFav = () => {
@@ -53,9 +77,9 @@ export class Article extends Component {
 
     submitForm = (e) => {
         e.preventDefault();
-        if(this.state.comment === '') {
+        if (this.state.comment === '') {
             return;
-        } 
+        }
         const payload = {
             body: this.state.comment,
             author: this.props.article.author._id,
@@ -110,7 +134,15 @@ export class Article extends Component {
                             </div>
                             <div className="others">
                                 <Link to={`/user/${this.props.article.author._id}`} className="name">{this.props.article.author.name}</Link>
-                                <div className="follow"><button className="bttn small actions">follow</button></div>
+                                {this.props.userDetails.name ?
+                                    <div className="follow">
+                                        {globals.checkFans(this.props.userDetails.following, this.props.article.author._id)
+                                            ? <button onClick={() => this.unfollow(this.props.article.author._id)} className="bttn small danger-pill">unfollow</button>
+                                            : <button onClick={() => this.follow(this.props.article.author._id)} className="bttn small actions">follow</button>
+                                        }
+                                    </div>
+                                    : ''
+                                }
                             </div>
                         </div>
                         <div className="social-favorite">
@@ -129,7 +161,7 @@ export class Article extends Component {
                     <div className="body">{this.props.article.body}</div>
                     <div className="body">
                         <div className="new-comment">
-                        <h2 className="component-heading1 mb-4">Comments</h2>
+                            <h2 className="component-heading1 mb-4">Comments</h2>
                             <form>
                                 <textarea
                                     className={this.state.rows > 1 ? "slide-in" : ''}
@@ -163,7 +195,14 @@ Article.prototypes = {
 }
 
 const mapDispatch = {
-    fetchArticle, addToFavorites, removeFromFavorites, fetchComments, removeComment, writeComment
+    fetchArticle,
+    addToFavorites,
+    removeFromFavorites,
+    fetchComments,
+    removeComment,
+    writeComment,
+    followUser,
+    unfollowUser
 }
 const mapstateToProps = state => ({
     article: state.articles.article,

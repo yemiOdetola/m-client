@@ -1,4 +1,4 @@
-import { LOGIN, SIGN_UP, USER_DETAILS, PROFILE, FOLLOWING } from '../actions/action-constants';
+import { LOGIN, SIGN_UP, USER_DETAILS, PROFILE, FOLLOWING, CLEAR } from '../actions/action-constants';
 import axios from 'axios';
 import globals from '../globals';
 const url = `${globals.BASE_URL}/users`;
@@ -43,10 +43,9 @@ export function login(props, payload) {
 }
 
 export function userFollows(id) {
-    console.log('in');
     const userToken = localStorage.getItem('mcUserToken');
     return dispatch => {
-        console.log('in dispatch');
+        dispatch(clear());
         axios.get(`${url}/user/${id}`, {
             headers: {
                 'Authorization': userToken
@@ -148,4 +147,11 @@ function user(data) {
         type: USER_DETAILS,
         payload: data
     };
+}
+
+function clear() {
+    return {
+        type: CLEAR,
+        payload: ''
+    }
 }

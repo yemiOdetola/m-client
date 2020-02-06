@@ -160,7 +160,6 @@ export function fetchComments(articleId) {
                 return console.log(response, 'not successful');
             }
             const res = response.data;
-            console.log(res)
                 dispatch(clear())
                 dispatch(completed());
                 dispatch(comments(res.comments))

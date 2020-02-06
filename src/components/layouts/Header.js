@@ -17,7 +17,6 @@ export class Header extends Component {
         if (!this.props.userDetails.username) {
             this.props.profileDetails();
         }
-        console.log(this.props.userDetails);
     }
 
     logout = () => {

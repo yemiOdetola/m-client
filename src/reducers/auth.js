@@ -1,4 +1,4 @@
-import { LOGIN, USER_DETAILS, PROFILE, FOLLOWING } from '../actions/action-constants';
+import { LOGIN, USER_DETAILS, PROFILE, FOLLOWING, CLEAR } from '../actions/action-constants';
 
 const initialState = {
     following: [],
@@ -33,6 +33,11 @@ export default function auth(state = initialState, action) {
                 ...state,
                 userr
             }
+        case CLEAR: 
+        return {
+            ...state,
+            following: [],
+        }
         default:
             return state;
     }

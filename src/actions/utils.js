@@ -1,23 +1,21 @@
-import { TOGGLE_ACTIVE, FOLLOWING, UNFOLLOW } from '../actions/action-constants';
+// import { FOLLOWING, UNFOLLOW } from '../actions/action-constants';
+import axios from 'axios';
+import globals from '../globals';
+const url = `${globals.BASE_URL}/users`;
 
-export function toggleFav(className) {
-    return (dispatch) => {
-        let classNam = className === 'active' ? 'inactive' : 'active';
-        dispatch(toggle(classNam)) 
-    }
-}
-
-export function followUser(accoundId, payload) {
+export function followUser(payload) {
+    const userToken = localStorage.getItem('mcUserToken');
     return dispatch => {
-        axios.post(`${url}/follow/${accoundId}`, payload)
+        axios.post(`${url}/follow/${payload.accountId}`, payload, {
+            headers: {
+                Authorization: userToken
+            }
+        })
             .then(response => {
                 if (response.success === false) {
                     return console.log(response, 'not successful');
                 }
-                console.log(response);
-                const res = response.data;
-                localStorage.setItem('mcUserToken', res.token);
-                dispatch(follow(res));
+                window.location.reload();
             })
             .catch(error => {
                 console.log('catch error register', error);
@@ -26,17 +24,19 @@ export function followUser(accoundId, payload) {
     }
 }
 
-export function unFollowUser(accoundId, payload) {
+export function unfollowUser(payload) {
+    const userToken = localStorage.getItem('mcUserToken');
     return dispatch => {
-        axios.post(`${url}/unfollow/${accoundId}`, payload)
+        axios.post(`${url}/unfollow/${payload.accountId}`, payload, {
+            headers: {
+                Authorization: userToken
+            }
+        })
             .then(response => {
                 if (response.success === false) {
                     return console.log(response, 'not successful');
                 }
-                console.log(response);
-                const res = response.data;
-                localStorage.setItem('mcUserToken', res.token);
-                dispatch(follow(res));
+                window.location.reload();
             })
             .catch(error => {
                 console.log('catch error register', error);
@@ -45,12 +45,5 @@ export function unFollowUser(accoundId, payload) {
     }
 }
 
-
-function toggle(className) {
-    return {
-        type: TOGGLE_ACTIVE,
-        className
-    }
-}
 
 
