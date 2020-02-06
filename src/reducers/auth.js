@@ -1,11 +1,13 @@
-import { LOGIN, USER_DETAILS } from '../actions/action-constants';
+import { LOGIN, USER_DETAILS, PROFILE, FOLLOWING } from '../actions/action-constants';
 
 const initialState = {
+    following: [],
+    userr: {},
     user: {},
     userDetails: {}
 }
 
-export default function articles(state = initialState, action) {
+export default function auth(state = initialState, action) {
     switch (action.type) {
         case LOGIN:
             let user = Object.assign({}, action.payload);
@@ -13,11 +15,23 @@ export default function articles(state = initialState, action) {
                 ...state,
                 user
             }
+        case FOLLOWING:
+            console.log(action.payload);
+            return {
+                ...state,
+                following: [...state.following, action.payload]
+            }
         case USER_DETAILS:
             let userDetails = Object.assign({}, action.payload);
             return {
                 ...state,
                 userDetails
+            }
+        case PROFILE:
+            let userr = Object.assign({}, action.payload);
+            return {
+                ...state,
+                userr
             }
         default:
             return state;

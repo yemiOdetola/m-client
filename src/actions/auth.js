@@ -1,4 +1,4 @@
-import { LOGIN, SIGN_UP, USER_DETAILS } from '../actions/action-constants';
+import { LOGIN, SIGN_UP, USER_DETAILS, PROFILE, FOLLOWING } from '../actions/action-constants';
 import axios from 'axios';
 import globals from '../globals';
 const url = `${globals.BASE_URL}/users`;
@@ -42,6 +42,58 @@ export function login(props, payload) {
     }
 }
 
+export function userFollows(id) {
+    console.log('in');
+    const userToken = localStorage.getItem('mcUserToken');
+    return dispatch => {
+        console.log('in dispatch');
+        axios.get(`${url}/user/${id}`, {
+            headers: {
+                'Authorization': userToken
+            }
+        })
+            .then(response => {
+                if (response.success === false) {
+                    return console.log(response, 'not successful');
+                }
+                const res = response.data;
+                dispatch(following(res.user));
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
+
+export function userrr(id) {
+    const userToken = localStorage.getItem('mcUserToken');
+    return dispatch => {
+        axios.get(`${url}/user/${id}`, {
+            headers: {
+                'Authorization': userToken
+            }
+        })
+            .then(response => {
+                if (response.success === false) {
+                    return console.log(response, 'not successful');
+                }
+                const res = response.data.user;
+                if (res.following && res.following.length > 0) {
+                    res.following.forEach(f => {
+                        userFollows(f);
+                    })
+                }
+                dispatch(profile(res));
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
 export function profileDetails() {
     const userToken = localStorage.getItem('mcUserToken');
     return dispatch => {
@@ -71,6 +123,19 @@ function saveUserAuth(data) {
     };
 }
 
+function following(payload) {
+    return {
+        type: FOLLOWING,
+        payload
+    }
+}
+
+function profile(payload) {
+    return {
+        type: PROFILE,
+        payload
+    }
+}
 function profileCreated(data) {
     return {
         type: SIGN_UP,

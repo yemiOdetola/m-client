@@ -1,4 +1,14 @@
-import { FETCH_ARTICLES, FETCH_ARTICLE, FETCH_TAGS, COMMENTS, INITIALIZED, ERROR, COMPLETED, CLEAR } from '../actions/action-constants';
+import { 
+    FETCH_ARTICLES,
+    FETCH_ARTICLE,
+    FETCH_TAGS,
+    FAVORITES,
+    AUTHORIZED,
+    COMMENTS,
+    INITIALIZED,
+    ERROR,
+    COMPLETED,
+    CLEAR, } from '../actions/action-constants';
 import axios from 'axios';
 import globals from '../globals';
 
@@ -34,6 +44,59 @@ export function fetchArticle(id) {
     }
 }
 
+export function fetchFavs(id) {
+    return (dispatch) => {
+        dispatch(clear());
+        axios.get(`${url}/article/${id}`)
+            .then(response => {
+                if (response.data.success === false) {
+                    alert(response.status);
+                    return console.log(response, 'not successful');
+                }
+                const article = response.data.article;
+                dispatch(favs(article));
+            })
+    }
+}
+
+export function fetchAuthorized(id) {
+    return (dispatch) => {
+        dispatch(clear());
+        axios.get(`${url}/article/${id}`)
+            .then(response => {
+                if (response.data.success === false) {
+                    alert(response.status);
+                    return console.log(response, 'not successful');
+                }
+                const article = response.data.article;
+                dispatch(authorized(article));
+            })
+    }
+}
+
+export function updateUserFav(articleId, payload) {
+    const userToken = localStorage.getItem('mcUserToken');
+    return dispatch => {
+        dispatch(initialized());
+        axios.post(`${url}/article/${articleId}/fav`, payload, {
+            headers: {
+                'Authorization': userToken
+            }
+        })
+            .then(response => {
+                if (response.success === false) {
+                    dispatch(error());
+                    return console.log(response, 'not successful');
+                }
+                dispatch(completed());
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
 export function addToFavorites(articleId, payload) {
     const userToken = localStorage.getItem('mcUserToken');
     return dispatch => {
@@ -48,6 +111,7 @@ export function addToFavorites(articleId, payload) {
                     dispatch(error());
                     return console.log(response, 'not successful');
                 }
+                this.updateUserFav(articleId, payload);
                 dispatch(completed());
             })
             .catch(error => {
@@ -133,7 +197,6 @@ export function removeComment(articleId, payload) {
     }
 }
 
-
 export function writeComment(payload) {
     const userToken = localStorage.getItem('mcUserToken');
     return dispatch => {
@@ -190,6 +253,27 @@ function singleArticle(article) {
 function allArticles(payload) {
     return {
         type: FETCH_ARTICLES,
+        payload
+    }
+}
+
+function favs(payload) {
+    return {
+        type: FAVORITES,
+        payload
+    }
+}
+
+// function following(payload) {
+//     return {
+//         type: FOLLOWING,
+//         payload
+//     }
+// }
+
+function authorized(payload) {
+    return {
+        type: AUTHORIZED,
         payload
     }
 }

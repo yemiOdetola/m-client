@@ -1,10 +1,23 @@
-import { FETCH_ARTICLES, FETCH_ARTICLE, FETCH_TAGS, COMMENTS, CLEAR, INITIALIZED, ERROR, COMPLETED } from '../actions/action-constants';
+import { 
+    FETCH_ARTICLES,
+    FETCH_ARTICLE,
+    FETCH_TAGS,
+    COMMENTS,
+    FAVORITES,
+    AUTHORIZED,
+    CLEAR,
+    INITIALIZED,
+    ERROR,
+    COMPLETED
+} from '../actions/action-constants';
 
 const initialState = {
     articles: [],
+    authorized: [],
     comments: [],
-    article: {},
+    favorites: [],
     tags: [],
+    article: {},
     initialized: false,
     error: false,
     completed: false,
@@ -27,6 +40,16 @@ export default function articles(state = initialState, action) {
                 ...state,
                 comments: [...state.comments, action.payload]
             }
+        case FAVORITES: 
+        return {
+            ...state,
+            favorites: [...state.favorites, action.payload]
+        }
+        case AUTHORIZED: 
+        return {
+            ...state,
+            authorized: [...state.authorized, action.payload]
+        }
         case FETCH_TAGS:
             return {
                 ...state,

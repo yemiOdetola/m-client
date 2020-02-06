@@ -4,7 +4,7 @@ const initialState = {
     className: {}
 }
 
-export default function articles(state = initialState, action) {
+export default function utils(state = initialState, action) {
     switch (action.type) {
         case TOGGLE_ACTIVE:
             return {
