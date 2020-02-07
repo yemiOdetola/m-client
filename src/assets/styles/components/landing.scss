@@ -6,22 +6,22 @@
             margin-top: 1.5rem;
             .tagline {
                 color: rgba(3, 168, 124, 1);
-                font-weight: bold;
+                font-weight: 800;
                 font-size: 0.935rem;
                 margin-bottom: 1rem;
                 @media(min-width: 768px) {
-                    font-size: 1.5rem;
+                    font-size: 1.125rem;
                 }
             }
             .title {
-                color: #006248;
+                color: #000;
                 font-size: 3rem;
                 text-align: left;
                 line-height: 4.25rem;
-                font-weight: 800;
+                font-weight: 300;
                 @media(min-width: 992px) {
                     line-height: 5rem;
-                    font-size: 3.75rem;
+                    font-size: 3.25rem;
                     width: 90%;
                 }
             }
@@ -48,6 +48,11 @@
             }
             img {
                 width: 100%;
+                transition: all 0.5s ease-in;
+                animation-name: anim;
+                animation-duration: .08s;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
                 @media(min-width: 1280px) {
                     width: 90%;
                     display: block;
@@ -65,34 +70,35 @@
                 max-width: 90%;
             }
             .tag {
-                padding: 0.35rem;
-                margin: 0.75rem;
+                padding: 0.25rem;
+                margin: 1rem;
                 margin-left: 0;
                 background: #fff;
-                box-shadow: 1px 1px 11px #dadbdd;
+                box-shadow: 1px 1px 3px #dadbdd;
                 color: #000;
-                font-weight: 600;
-                border-radius: 1rem;
+                font-weight: 400;
+                font-size: 0.75rem;
+                border-radius: 0.5rem;
                 transition: all 0.125s ease-in-out;
                 &:hover {
                     cursor: pointer;
-                    box-shadow: 1px 1px 2px #dadbdd;
+                    box-shadow: 1px 1px 12px #dadbdd;
                 }
                 @media(min-width: 768px) {
                     padding: 0.5rem;
-                    font-size: 1.25rem;
+                    font-size: 1rem;
                 }
                 span.hash {
-                    width: 22px;
-                    height: 22px;
+                    width: 12px;
+                    height: 12px;
                     color: #ffffff;
                     background-color: #555;
                     display: inline-block;
                     border-radius: 50%;
                     text-align: center;
                     @media(min-width: 768px) {                       
-                        width: 30px;
-                        height: 30px;
+                        width: 24px;
+                        height: 24px;
                     }
                 }
             }
@@ -116,10 +122,10 @@
                     margin-right: 0.75rem;
                     width: 25px;
                     height: 25px;
-                    box-shadow: 1px 1px 6px #d4d5d7;
+                    box-shadow: 1px 1px 3px #d4d5d7;
                     padding: 0.35rem;
                     border-radius: 50%;
-                    // background: #C2FFEC;
+                    filter: grayscale(0.9);
                     @media(min-width: 768px) {
                         width: 45px;
                         height: 45px;
@@ -138,17 +144,26 @@
             }
         }
         .trial {
-            font-size: 2rem;
-            color: #fff;
-            font-weight: 800;
-            background: rgb(7, 158, 113);
+            font-size: 1.75rem;
+            color: #999;
+            font-weight: 300;
+            background: rgba(255, 255, 255, 0.801);
             padding: 1rem;
-            box-shadow: 1px 1px 1rem #d4d5d7;
-            border-radius: 2rem;
+            box-shadow: 1px 1px 0.25rem #d4d5d7;
+            border-radius: 0.25rem;
             @media(min-width: 992px) {
-                font-size: 4rem;
+                font-size: 2.5rem;
                 padding: 1.5rem;
             }
         }
+    }
+}
+
+@keyframes anim {
+    from {
+      filter: grayscale(0.5);
+    }
+    to {
+      filter: grayscale(0);
     }
 }

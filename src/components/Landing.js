@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../assets/styles/components/landing.scss';
 import Header from './layouts/Header';
 import PropTypes from 'prop-types';
@@ -8,16 +8,16 @@ import { fetchTags } from '../actions/articles';
 
 export class Landing extends Component {
     componentDidMount() {
-        // if(localStorage.getItem('mcUserToken')) {
-        //     this.props.fetchTags();
-        // } else {
-        //     this.props.history.push('/login');
-        // }
+        if (localStorage.getItem('mcUserToken')) {
+            this.props.fetchTags();
+        } else {
+            this.props.history.push('/login');
+        }
     }
     render() {
         let tags = [];
-        if (this.props.tags) {
-            const fetchedTags = this.props.tags;
+        if (this.props.tags && this.props.tags[0]) {
+            const fetchedTags = this.props.tags[0];
             fetchedTags.forEach((tag, index) => {
                 tags.push(<div className="tag" key={index}><span className="hash">#</span>&nbsp; {tag}</div>)
             })
@@ -37,7 +37,7 @@ export class Landing extends Component {
                                     </div>
                                 </div>
                                 <div className="banner-actions">
-                                    <button className="bttn dye mr-2"><Link to="/register">Get started</Link></button>
+                                    <button className="bttn primary mr-2"><Link to="/register">Get started</Link></button>
                                     <button className="bttn plain">or learn more</button>
                                 </div>
                             </div>
@@ -63,7 +63,10 @@ export class Landing extends Component {
                     <div className="about-mclone component-spacing">
                         <div className="component-heading1">Lets do this</div>
                         <div className="row">
-                            <div className="col-xl-5">
+                            <div className="col-xl-5 p-0 mt-3">
+                                <div className="trial">Don't you feel like trying? ...c'mon</div>
+                            </div>
+                            <div className="col-xl-5 offset-xl-2">
                                 <div className="each-row">
                                     <div className="item">
                                         <img src={require('../assets/images/surfer.svg')} alt="" />
@@ -85,11 +88,8 @@ export class Landing extends Component {
                                     </div>
                                 </div>
                                 <div className="banner-actions mt-5">
-                                    <button className="bttn dye"><Link to="/articles">See articles</Link></button>
+                                    <button className="bttn primary"><Link to="/articles">See articles</Link></button>
                                 </div>
-                            </div>
-                            <div className="col-xl-7 p-0 mt-3">
-                                <div className="trial">Don't you feel like trying? ...c'mon</div>
                             </div>
                         </div>
                     </div>

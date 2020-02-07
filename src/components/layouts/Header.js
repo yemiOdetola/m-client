@@ -40,8 +40,8 @@ export class Header extends Component {
                                 </Link>
                             </div>
                             <nav className="menu">
-                                <div className="each-menu text">Account</div>
-                                <div className="each-menu text">Account</div>
+                                <Link to='/articles' className="each-menu text">Articles</Link>
+                                <div className="each-menu text">About</div>
                                 {this.props.userDetails._id ?
                                     <div className="user">
                                         <Link to={`/user/${this.props.userDetails._id}`}>Hi, {this.props.userDetails.username}</Link>

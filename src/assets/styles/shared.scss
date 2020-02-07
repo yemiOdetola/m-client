@@ -88,11 +88,12 @@ body {
 //-----------------------   forms  start  -----------------------
 .bttn {
     width: 100px;
-    height: 45px;
+    height: 38px;
     font-weight: 600;
     font-size: 0.875rem;
     border: none;
     display: block;
+    border-radius: 0.25rem;
     transition: 0.15s all ease-in-out;
     &:disabled {
         cursor: not-allowed !important;

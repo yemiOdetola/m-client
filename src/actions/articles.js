@@ -224,7 +224,7 @@ export function writeComment(payload) {
 export function fetchTags() {
     return (dispatch) => {
         dispatch(clear());
-        axios.get(`${url}/tags/all`)
+        axios.get(`${globals.BASE_URL}/tags/all`)
             .then(response => {
                 if (response.data.success === false) {
                     alert(response);
