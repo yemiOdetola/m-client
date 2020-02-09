@@ -210,11 +210,11 @@ const mapDispatch = {
     unfollowUser,
     profileDetails
 }
-const mapstateToProps = state => ({
+const mapStateToProps = state => ({
     article: state.articles.article,
     userDetails: state.auth.userDetails,
     initialized: state.articles.initialized,
     comments: state.articles.comments
 })
 
-export default connect(mapstateToProps, mapDispatch)(Article);
+export default connect(mapStateToProps, mapDispatch)(Article);

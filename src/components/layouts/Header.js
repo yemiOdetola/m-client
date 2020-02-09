@@ -14,7 +14,7 @@ export class Header extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.userDetails.username) {
+        if (!this.props.userDetails.username && localStorage.getItem('mcUserToken')) {
             this.props.profileDetails();
         }
     }

@@ -89,6 +89,9 @@
                     bottom: 0.25rem;
                    img.favorite {
                        width: 22px;
+                       &:hover {
+                           cursor: pointer;
+                       }
                    }
                 }
             }

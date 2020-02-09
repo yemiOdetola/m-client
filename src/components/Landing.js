@@ -28,7 +28,7 @@ export class Landing extends Component {
                 <div className="landing-component">
                     <div className="banner component-spacing">
                         <div className="row">
-                            <div className="col-xl-5 col-md-12">
+                            <div className="col-xl-6 col-md-12">
                                 <div className="banner-text">
                                     <div className="tagline">Write. Read. Learn. Explore.</div>
                                     <div className="title">Mind reading 'til you forget dinner?   legooo! </div>
@@ -41,7 +41,7 @@ export class Landing extends Component {
                                     <button className="bttn plain">or learn more</button>
                                 </div>
                             </div>
-                            <div className="col-xl-7 col-md-12">
+                            <div className="col-xl-6 col-md-12">
                                 <div className="banner-image">
                                     <img src={require('../assets/images/bg-home.svg')} alt="" />
                                 </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Loader from './utils/Loader';
 import Header from './layouts/Header';
 import PropTypes from 'prop-types';
@@ -17,26 +17,28 @@ export class Login extends Component {
         }
     }
 
+    componentDidMount() {
+        if (localStorage.getItem('mcUserToken')) {
+            this.props.history.push('/login');
+        }
+    }
+
     handleChange = (key, value) => {
         this.setState({
             [key]: value
         })
     };
+
     submitForm = (e) => {
-      this.setState({loading: true});
+        this.setState({ loading: true });
         e.preventDefault();
-        if (!this.state.email || !this.state.password) {return}
+        if (!this.state.email || !this.state.password) { return }
         let payload = {
             email: this.state.email,
             password: this.state.password
         }
         this.props.login(this.props, payload);
-        this.setState({loading: false});
-    }
-    componentDidMount() {
-        if (localStorage.getItem('mcUserToken')) {
-            this.props.history.push('/login');
-        }
+        this.setState({ loading: false });
     }
     render() {
         return (
@@ -63,7 +65,13 @@ export class Login extends Component {
                                             <input type="password" name="password" id="password"
                                                 onChange={e => this.handleChange("password", e.target.value)} />
                                         </div>
-                                        <button type="button" disabled={this.state.loading} onClick={this.submitForm} className="bttn dye mt-5 mx-auto">Submit</button>
+                                        <button
+                                            type="button"
+                                            disabled={this.props.initialized}
+                                            onClick={this.submitForm}
+                                            className="bttn primary mt-5 mx-auto">Submit
+                                             <span className={this.props.initialized ? "loader" : 'hide'}></span>
+                                        </button>
                                     </form>
                                     <div className="auth-extra">Don't have an account yet? <Link to='/register'>Register</Link></div>
                                 </div>
@@ -75,10 +83,12 @@ export class Login extends Component {
         )
     }
 }
-
+const mapStateToProps = state => ({
+    initialized: state.auth.initialized,
+})
 
 Login.propTypes = {
     login: PropTypes.func.isRequired
 }
 
-export default connect(null, { login })(Login)
+export default connect(mapStateToProps, { login })(Login)

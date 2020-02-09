@@ -1,4 +1,4 @@
-import { LOGIN, SIGN_UP, USER_DETAILS, PROFILE, FOLLOWING, CLEAR } from '../actions/action-constants';
+import { LOGIN, SIGN_UP, USER_DETAILS, PROFILE, FOLLOWING, INITIALIZED, ERROR, CLEAR } from '../actions/action-constants';
 import axios from 'axios';
 import globals from '../globals';
 const url = `${globals.BASE_URL}/users`;
@@ -29,11 +29,34 @@ export function login(props, payload) {
                 if (response.success === false) {
                     return console.log(response, 'not successful');
                 }
-                console.log(response);
                 const res = response.data;
                 localStorage.setItem('mcUserToken', res.token);
                 dispatch(saveUserAuth(res));
                 props.history.push('/');
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
+export function editProfile(props, payload) {
+    const userToken = localStorage.getItem('mcUserToken');
+    console.log(props);
+    return dispatch => {
+        dispatch(initialized());
+        axios.put(`${url}/profile`, payload, {
+            headers: {
+                'Authorization': userToken
+            }
+        })
+            .then(response => {
+                if (response.success === false) {
+                    dispatch(error());
+                    return console.log(response, 'not successful');
+                }
+                props.history.push(`/user/${props.match.params.id}`);
             })
             .catch(error => {
                 console.log('catch error register', error);
@@ -152,6 +175,20 @@ function user(data) {
 function clear() {
     return {
         type: CLEAR,
+        payload: ''
+    }
+}
+
+function initialized() {
+    return {
+        type: INITIALIZED,
+        payload: ''
+    }
+}
+
+function error() {
+    return {
+        type: ERROR,
         payload: ''
     }
 }

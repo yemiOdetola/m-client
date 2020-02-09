@@ -2,8 +2,8 @@
     @media(max-width: 767px) {
         display: none;
     }
-    padding: 1.2rem 1rem;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 1rem;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -16,21 +16,10 @@
         .each-menu, a.each-menu {
             margin: 0.5rem 1rem;
             font-size: 0.875rem;
-            color: rgb(29, 29, 29);
+            color: rgb(14, 14, 14);
             font-weight: 500;
             transition: all 0.125s ease-out;
             cursor: pointer;
-            &.text {
-                color: #6C6B6B;
-                font-weight: 300;
-            }
-            &.item {
-                &:hover {
-                    color: #333;
-                    font-weight: 600;
-                    text-decoration: underline;
-                }
-            }
         }
         button {
             position: relative;
@@ -40,10 +29,10 @@
 }
 .logo {
     img {
-        width: 78px;
-        height: auto;
+        width: auto;
+        height: 25px;
         @media(min-width: 768px) {
-            width: 98px
+            height: 30px;
         }
         &:hover {
             cursor: pointer;
@@ -68,7 +57,7 @@
     }
 }
 .mobile-menu {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;

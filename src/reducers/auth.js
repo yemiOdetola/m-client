@@ -1,10 +1,12 @@
-import { LOGIN, USER_DETAILS, PROFILE, FOLLOWING, CLEAR } from '../actions/action-constants';
+import { LOGIN, USER_DETAILS, PROFILE, FOLLOWING, INITIALIZED, ERROR, CLEAR } from '../actions/action-constants';
 
 const initialState = {
     following: [],
     userr: {},
     user: {},
-    userDetails: {}
+    userDetails: {},
+    initialized: false,
+    error: false,
 }
 
 export default function auth(state = initialState, action) {
@@ -33,11 +35,22 @@ export default function auth(state = initialState, action) {
                 ...state,
                 userr
             }
-        case CLEAR: 
-        return {
-            ...state,
-            following: [],
-        }
+        case INITIALIZED:
+            return {
+                ...state,
+                initialized: true,
+            }
+        case ERROR:
+            return {
+                ...state,
+                error: true,
+                initialized: false,
+            }
+        case CLEAR:
+            return {
+                ...state,
+                following: [],
+            }
         default:
             return state;
     }

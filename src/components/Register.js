@@ -94,7 +94,7 @@ export class Register extends Component {
                                                 onChange={e => this.handleChange("bio", e.target.value)}>
                                             </textarea>
                                         </div>
-                                        <button disabled={this.state.loading} type="button" onClick={this.submitForm} className="bttn dye mt-5 mx-auto">Submit</button>
+                                        <button disabled={this.state.loading} type="button" onClick={this.submitForm} className="bttn primary mt-5 mx-auto">Submit</button>
                                     </form>
                                     <div className="auth-extra">Already have an account? <Link to='/login'>Login</Link></div>
                                     <div className="auth-extra mt-3">By signing up, we assume you agree to our terms and usage policy</div>
