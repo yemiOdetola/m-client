@@ -88,7 +88,6 @@ export function userFollows(id) {
     }
 }
 
-
 export function userrr(id) {
     const userToken = localStorage.getItem('mcUserToken');
     return dispatch => {

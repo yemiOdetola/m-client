@@ -156,6 +156,11 @@ export class Article extends Component {
                                 className={globals.checkFavorite(this.props.article.favorites, this.props.userDetails._id)
                                     ? 'favorite' : 'hide'}
                                 onClick={this.removeFromFav} alt="" />
+                            <div className="divider"></div>
+                            <Link to={`/edit-article/${this.props.article._id}`}>
+                                <img src={require('../assets/images/edit.svg')} alt="edit article" />
+                            </Link>
+                            <img src={require('../assets/images/trash.svg')} alt="delete article" />
                         </div>
                     </div>
                     <figure className="feature-img">

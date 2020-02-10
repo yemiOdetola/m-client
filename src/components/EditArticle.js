@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import globals from '../globals';
 import Loader from './utils/Loader';
 import Header from './layouts/Header';
-import {createArticle} from '../actions/articles';
-// import globals from '../globals';
+import { createArticle, editArticle} from '../actions/articles';
+
 
 export class EditArticle extends Component {
   constructor(props) {
@@ -17,15 +19,34 @@ export class EditArticle extends Component {
       tag: '',
       fs: '',
       body: '',
+      id: ''
     }
   }
 
   componentDidMount() {
     if (this.props.match.params.id) {
-
-    } else {
-
+      const id = this.props.match.params.id;
+      this.fetchArticle(id);
+      this.setState({id})
     }
+  }
+
+  fetchArticle = (id) => {
+    this.setState({ loading: true });
+    axios.get(`${globals.BASE_URL}/articles/article/${id}`)
+      .then(response => {
+        if (response.data.success === false) {
+          return console.log(response, 'not successful');
+        }
+        const article = response.data.article;
+        this.setState({
+          title: article.title,
+          description: article.description,
+          tag: article.tag,
+          body: article.body,
+          loading: false
+        })
+      })
   }
 
   handleChange = (key, value) => {
@@ -43,12 +64,11 @@ export class EditArticle extends Component {
     }
   }
 
-  submitForm = (e) => {
-    e.preventDefault();
-    this.setState({ loading: true });
+  createArt = () => {
+    console.log('create art');
     if (!this.state.title || !this.state.description || !this.state.body || !this.state.fs || !this.state.body) {
       this.setState({ loading: false });
-      alert('All the fields are compulsory');
+      return alert('All the fields are compulsory');
     }
     const payload = new FormData();
     payload.append('title', this.state.title);
@@ -59,6 +79,36 @@ export class EditArticle extends Component {
     payload.append('feature_img', this.state.fs, this.state.fs.name);
     this.props.createArticle(this.props, payload);
     this.setState({ loading: false });
+  }
+
+  editArt = () => {
+    console.log('edit art');
+    if (!this.state.title || !this.state.description || !this.state.body || !this.state.body) {
+      this.setState({ loading: false });
+      return alert('All the fields are compulsory');
+    }
+    const payload = new FormData();
+    payload.append('title', this.state.title);
+    payload.append('description', this.state.description);
+    payload.append('tag', this.state.tag);
+    payload.append('body', this.state.body);
+    payload.append('author', this.props.user._id);
+    if (this.state.fs) {
+      payload.append('feature_img', this.state.fs, this.state.fs.name);
+    }
+    this.props.editArticle(this.props, payload, this.state.id);
+    this.setState({ loading: false });
+  }
+
+
+  submitForm = (e) => {
+    this.setState({ loading: true });
+    e.preventDefault();
+    if (this.state.id) {
+      this.editArt()
+    } else {
+      this.createArt()
+    }
   }
 
 
@@ -79,7 +129,7 @@ export class EditArticle extends Component {
                   </div>
                   <div className="form-item no-radius">
                     <label htmlFor="description">Description</label>
-                    <textarea rows="5" id="description" value={this.state.description || ''}
+                    <textarea rows="6" id="description" value={this.state.description || ''}
                       onChange={e => this.handleChange("description", e.target.value)}>
                     </textarea>
                   </div>
@@ -89,7 +139,7 @@ export class EditArticle extends Component {
                     </label>
                     <input type="file" accept="image/*" name="feature_img" id="feature_img"
                       onChange={(e) => this.onFileChange(e)} />
-                    <div className={this.state.fs ? "hide" : "placeholder"}>upload an article banner</div>
+                    <div className={!this.state.fs ? "placeholder" : "hide"}>article's banner</div>
                     <div className={this.state.fs ? "placeholder slide-in" : "hide"}>{this.state.fs.name}</div>
                   </div>
                   <div className="form-item no-radius">
@@ -114,10 +164,10 @@ export class EditArticle extends Component {
                       }}
                     />
                   </div>
-                  <button type="button"
+                  <button type="click"
                     disabled={this.state.loading || this.props.initialized}
                     onClick={this.submitForm}
-                    className="bttn primary mt-5 mx-auto">Submit
+                    className="mx-auto mr-3 slide-in bttn primary">Submit
                     <span className={this.props.initialized ? "loader" : 'hide'}></span>
                   </button>
                 </form>
@@ -135,6 +185,6 @@ const mapStateToProps = (state) => ({
   initialized: state.articles.initialized
 })
 
-const mapDispatchToProps = {createArticle}
+const mapDispatchToProps = { createArticle, editArticle}
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditArticle)

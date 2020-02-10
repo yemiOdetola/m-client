@@ -15,9 +15,12 @@
         }
     }
     .user-share {
-        display: flex;
-        justify-content: space-between;
         margin: 2rem auto;
+        @media(min-width: 768px) {
+            display: flex;
+            justify-content: space-between;
+
+        }
         @media(min-width: 992px) {
             width: 80%;
         }
@@ -55,13 +58,26 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            img {
-                width: 22px;
-                height: 22px;
+            @media(max-width: 767px) {
+                margin-top: 1rem;
+                justify-content: flex-end;
+            }
+            .divider {
+                border: 1px solid #ddd;
+                height: 40px;
+                margin-right: 1rem;
+            }
+            img, a img {
+                width: 28px;
+                height: 28px;
                 display: block;
                 margin-right: 1rem;
                 &:hover {
                     cursor: pointer;
+                }
+                @media(min-width: 768px) {
+                    width: 22px;
+                    height: 22px;
                 }
             }
         }
