@@ -56,6 +56,7 @@ export function editProfile(props, payload) {
                     dispatch(error());
                     return console.log(response, 'not successful');
                 }
+                dispatch(clear());
                 props.history.push(`/user/${props.match.params.id}`);
             })
             .catch(error => {

@@ -64,6 +64,15 @@ export class EditArticle extends Component {
     }
   }
 
+  submitForm = (e) => {
+    this.setState({ loading: true });
+    e.preventDefault();
+    if (this.state.id) {
+      this.editArt()
+    } else {
+      this.createArt()
+    }
+  }
   createArt = () => {
     console.log('create art');
     if (!this.state.title || !this.state.description || !this.state.body || !this.state.fs || !this.state.body) {
@@ -98,17 +107,6 @@ export class EditArticle extends Component {
     }
     this.props.editArticle(this.props, payload, this.state.id);
     this.setState({ loading: false });
-  }
-
-
-  submitForm = (e) => {
-    this.setState({ loading: true });
-    e.preventDefault();
-    if (this.state.id) {
-      this.editArt()
-    } else {
-      this.createArt()
-    }
   }
 
 

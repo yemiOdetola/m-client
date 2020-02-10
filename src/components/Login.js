@@ -69,7 +69,7 @@ export class Login extends Component {
                                             type="button"
                                             disabled={this.props.initialized}
                                             onClick={this.submitForm}
-                                            className="bttn primary mt-5 mx-auto">Submit
+                                            className="mx-auto mr-3 slide-in bttn primary">Submit
                                              <span className={this.props.initialized ? "loader" : 'hide'}></span>
                                         </button>
                                     </form>

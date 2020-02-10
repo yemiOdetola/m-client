@@ -14,7 +14,6 @@ export class Header extends Component {
     }
 
     componentDidMount() {
-        if (!localStorage.getItem('mcUserToken')) return this.props.history.push('/');
         if (!this.props.userDetails.username) this.props.profileDetails();
     }
 

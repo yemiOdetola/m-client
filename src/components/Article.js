@@ -14,6 +14,7 @@ import {
     fetchComments,
     removeComment,
     writeComment,
+    deleteArticle,
 } from '../actions/articles';
 import { followUser, unfollowUser } from '../actions/utils';
 import { profileDetails } from '../actions/auth';
@@ -32,7 +33,6 @@ export class Article extends Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         this.props.fetchArticle(id);
-        // this.props.profileDetails();
         this.props.fetchComments(id);
         this.setState({ id });
     }
@@ -89,6 +89,13 @@ export class Article extends Component {
                 comment: ''
             })
         }, 500)
+    }
+
+    deleteArt = () => {
+        const payload = {
+            author_id: this.props.article.author._id
+        }
+        this.props.deleteArticle(this.props, payload, this.state.id);
     }
 
     commentFocus = () => {
@@ -156,11 +163,13 @@ export class Article extends Component {
                                 className={globals.checkFavorite(this.props.article.favorites, this.props.userDetails._id)
                                     ? 'favorite' : 'hide'}
                                 onClick={this.removeFromFav} alt="" />
-                            <div className="divider"></div>
-                            <Link to={`/edit-article/${this.props.article._id}`}>
+                            <div className={this.props.article.author._id === this.props.userDetails._id ? "divider" : 'hide'}></div>
+                            <Link to={`/edit-article/${this.props.article._id}`}
+                                className={this.props.article.author._id === this.props.userDetails._id ? "" : 'hide'}>
                                 <img src={require('../assets/images/edit.svg')} alt="edit article" />
                             </Link>
-                            <img src={require('../assets/images/trash.svg')} alt="delete article" />
+                            <img className={this.props.article.author._id === this.props.userDetails._id ? "" : 'hide'}
+                                src={require('../assets/images/trash.svg')} onClick={this.deleteArt} alt="delete article" />
                         </div>
                     </div>
                     <figure className="feature-img">
@@ -171,22 +180,25 @@ export class Article extends Component {
                     <div className="body">
                         <div className="new-comment">
                             <h2 className="component-heading1 mb-4">Comments</h2>
-                            <form>
-                                <textarea
-                                    className={this.state.rows > 1 ? "slide-in" : ''}
-                                    placeholder={`Write a comment @${this.props.userDetails.username}`}
-                                    rows={this.state.rows}
-                                    value={this.state.comment}
-                                    onChange={(e) => this.setState({ comment: e.target.value })}
-                                    onFocus={this.commentFocus}></textarea>
-                                <button
-                                    type="click"
-                                    disabled={this.props.initialized}
-                                    className='ml-auto mr-3 slide-in bttn primary'
-                                    onClick={this.submitForm}>Submit
+                            {this.props.userDetails && this.props.userDetails._id ?
+                                <form>
+                                    <textarea
+                                        className={this.state.rows > 1 ? "slide-in" : ''}
+                                        placeholder={`Write a comment @${this.props.userDetails.username}`}
+                                        rows={this.state.rows}
+                                        value={this.state.comment}
+                                        onChange={(e) => this.setState({ comment: e.target.value })}
+                                        onFocus={this.commentFocus}></textarea>
+                                    <button
+                                        type="click"
+                                        disabled={this.props.initialized}
+                                        className='ml-auto mr-3 slide-in bttn primary'
+                                        onClick={this.submitForm}>Submit
                                     <span className={this.props.initialized ? "loader" : 'hide'}></span>
-                                </button>
-                            </form>
+                                    </button>
+                                </form>
+                                : <div className="text-center h5">You need to login to add comments <Link to="/login">login</Link></div>
+                            }
                         </div>
                         <div className="comments">
                             {comments}
@@ -213,7 +225,8 @@ const mapDispatch = {
     writeComment,
     followUser,
     unfollowUser,
-    profileDetails
+    profileDetails,
+    deleteArticle,
 }
 const mapStateToProps = state => ({
     article: state.articles.article,

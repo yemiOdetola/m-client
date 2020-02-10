@@ -276,7 +276,32 @@ export function editArticle(props, payload, id) {
                     return console.log(response, 'not successful');
                 }
                 dispatch(completed());
-                // props.history.push('/articles');
+                props.history.push('/articles');
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
+            })
+    }
+}
+
+export function deleteArticle(props, payload, id) {
+    const userToken = localStorage.getItem('mcUserToken');
+    return dispatch => {
+        dispatch(initialized());
+        axios
+            .post(`${url}/delete/${id}`, payload, {
+                headers: {
+                    'Authorization': userToken
+                }
+            })
+            .then(response => {
+                if (response.success === false) {
+                    dispatch(error());
+                    return console.log(response, 'not successful');
+                }
+                dispatch(completed());
+                props.history.push('/articles');
             })
             .catch(error => {
                 console.log('catch error register', error);
