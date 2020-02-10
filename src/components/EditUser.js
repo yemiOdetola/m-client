@@ -71,7 +71,7 @@ export class EditUser extends Component {
       twitter: this.state.twitter,
       facebook: this.state.facebook,
       instagram: this.state.instagram,
-      password: this.state.password
+      password: this.state.password,
     }
     this.props.editProfile(this.props, payload);
     this.setState({ loading: false });

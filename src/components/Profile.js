@@ -22,6 +22,7 @@ export class Profile extends Component {
   }
   componentDidMount() {
     const id = this.props.match.params.id;
+    this.setState({id});
     this.userrr(id);
   }
 
@@ -184,25 +185,25 @@ export class Profile extends Component {
                 </div>
               </div>
               <div className="socials">
-                {/* <div className={this.state.user.birdapp ? "social" : 'hide'}> */}
-                <div className="social">
+                <div className={this.state.user.twitter ? "social" : 'hide'}>
                   <img src={require('../assets/images/twitter.svg')} alt="#" />
-                  <a href={`https://twitter.com/yemiotola`} target="_blank" rel="noopener noreferrer">@yemiOtola</a>
+                  <a href={`https://twitter.com/yemiotola`} target="_blank" rel="noopener noreferrer">{this.state.user.twitter}</a>
                 </div>
-                {/* <div className={this.state.user.gram ? "social" : 'hide'}> */}
-                <div className="social">
-                  <img src={require('../assets/images/flame.svg')} alt="#" />
-                  <a href={`https://twitter.com/yemiotola`} target="_blank" rel="noopener noreferrer">@zodaicZinna</a>
+                <div className={this.state.user.instagram ? "social" : 'hide'}>
+                  <img src={require('../assets/images/instagram.svg')} alt="#" />
+                  <a href={`https://instagram.com/${this.state.user.instagram}`} target="_blank" rel="noopener noreferrer">{this.state.user.instagram}</a>
                 </div>
-                {/* <div className={this.state.user.facebook ? "social" : 'hide'}> */}
-                <div className="social">
+                <div className={this.state.user.facebook ? "social" : 'hide'}>
                   <img src={require('../assets/images/facebook.svg')} alt="#" />
-                  <a href={`https://twitter.com/yemiotola`} target="_blank" rel="noopener noreferrer">Azah Onisoya</a>
+                  <a href={`https://facebook.com/${this.state.user.facebook}`} target="_blank" rel="noopener noreferrer">{this.state.user.facebook}</a>
                 </div>
               </div>
               <div className="user-details">
                 <div className="name">{this.state.user.name}</div>
                 <div className="bio">{this.state.user.bio}</div>
+              </div>
+              <div className="edit-link" >
+                <Link className="link" to={`/edit-profile/${this.state.id}`}>Edit profile</Link>
               </div>
             </div> : <Loader loading={true} />}
           <div className="arts">

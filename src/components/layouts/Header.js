@@ -14,9 +14,8 @@ export class Header extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.userDetails.username && localStorage.getItem('mcUserToken')) {
-            this.props.profileDetails();
-        }
+        if(!localStorage.getItem('mcUserToken')) return this.props.history.push('/');
+        if (!this.props.userDetails.username) this.props.profileDetails();
     }
 
     logout = () => {
@@ -63,7 +62,8 @@ export class Header extends Component {
                         </div>
                         <div className={this.state.open ? "menu-items slide-in" : 'hide'}>
                             <div className="each">item</div>
-                            <div className="each">item</div>
+                            <div className="each"><Link to="/articles">Articles</Link></div>
+                            <div className="each"><Link to="/create-article">Create article</Link></div>
                             {this.props.userDetails._id ?
                                 <div className="user">
                                     <Link to={`/user/${this.props.userDetails._id}`}>Hi, {this.props.userDetails.username}</Link>
