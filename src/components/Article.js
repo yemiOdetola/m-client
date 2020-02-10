@@ -162,7 +162,7 @@ export class Article extends Component {
                         <img src={this.props.article.feature_img} alt={this.props.feature_img} />
                     </figure>
                     <div className="description">{this.props.article.description}</div>
-                    <div className="body">{this.props.article.body}</div>
+                    <div className="body" dangerouslySetInnerHTML={{ __html: this.props.article.body }}></div>
                     <div className="body">
                         <div className="new-comment">
                             <h2 className="component-heading1 mb-4">Comments</h2>

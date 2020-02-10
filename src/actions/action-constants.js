@@ -15,3 +15,4 @@ export const FOLLOW = 'FOLLOW';
 export const UNFOLLOW = 'UNFOLLOW';
 export const AUTHORIZED = 'AUTHORIZED';
 export const PROFILE = 'PROFILE';
+export const CREATE_ARTICLE = 'CREATE_ARTICLE';

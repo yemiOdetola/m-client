@@ -4,6 +4,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { connect } from 'react-redux';
 import Loader from './utils/Loader';
 import Header from './layouts/Header';
+import {createArticle} from '../actions/articles';
 // import globals from '../globals';
 
 export class EditArticle extends Component {
@@ -15,6 +16,7 @@ export class EditArticle extends Component {
       description: '',
       tag: '',
       fs: '',
+      body: '',
     }
   }
 
@@ -31,14 +33,32 @@ export class EditArticle extends Component {
       [key]: value
     })
   }
+
   onFileChange = (e) => {
     e.preventDefault();
-    console.log(e.target.files);
     if (e.target.files.length > 0) {
       this.setState({
         fs: e.target.files[0]
       })
     }
+  }
+
+  submitForm = (e) => {
+    e.preventDefault();
+    this.setState({ loading: true });
+    if (!this.state.title || !this.state.description || !this.state.body || !this.state.fs || !this.state.body) {
+      this.setState({ loading: false });
+      alert('All the fields are compulsory');
+    }
+    const payload = new FormData();
+    payload.append('title', this.state.title);
+    payload.append('description', this.state.description);
+    payload.append('tag', this.state.tag);
+    payload.append('body', this.state.body);
+    payload.append('author', this.props.user._id);
+    payload.append('feature_img', this.state.fs, this.state.fs.name);
+    this.props.createArticle(this.props, payload);
+    this.setState({ loading: false });
   }
 
 
@@ -70,7 +90,7 @@ export class EditArticle extends Component {
                     <input type="file" accept="image/*" name="feature_img" id="feature_img"
                       onChange={(e) => this.onFileChange(e)} />
                     <div className={this.state.fs ? "hide" : "placeholder"}>upload an article banner</div>
-                    <div className={this.state.fs ? "placeholder" : "hide"}>{this.state.fs.name}</div>
+                    <div className={this.state.fs ? "placeholder slide-in" : "hide"}>{this.state.fs.name}</div>
                   </div>
                   <div className="form-item no-radius">
                     <label htmlFor="tag">Tag</label>
@@ -82,12 +102,9 @@ export class EditArticle extends Component {
                     <CKEditor
                       editor={ClassicEditor}
                       data={this.state.body}
-                      onInit={editor => {
-                        console.log('Editor is ready to use!', editor);
-                      }}
                       onChange={(event, editor) => {
                         const data = editor.getData();
-                        this.setState({body: data})
+                        this.setState({ body: data })
                       }}
                       onBlur={(event, editor) => {
                         console.log('Blur.', editor);
@@ -101,6 +118,7 @@ export class EditArticle extends Component {
                     disabled={this.state.loading || this.props.initialized}
                     onClick={this.submitForm}
                     className="bttn primary mt-5 mx-auto">Submit
+                    <span className={this.props.initialized ? "loader" : 'hide'}></span>
                   </button>
                 </form>
               </div>
@@ -112,10 +130,11 @@ export class EditArticle extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  user: state.auth.userDetails,
+  initialized: state.articles.initialized
+})
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = {createArticle}
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditArticle)

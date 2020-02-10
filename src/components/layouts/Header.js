@@ -14,7 +14,7 @@ export class Header extends Component {
     }
 
     componentDidMount() {
-        if(!localStorage.getItem('mcUserToken')) return this.props.history.push('/');
+        if (!localStorage.getItem('mcUserToken')) return this.props.history.push('/');
         if (!this.props.userDetails.username) this.props.profileDetails();
     }
 
@@ -39,8 +39,9 @@ export class Header extends Component {
                                 </Link>
                             </div>
                             <nav className="menu">
-                                <Link to='/articles' className="each-menu text">Articles</Link>
-                                <div className="each-menu text">About</div>
+                                <Link className="each-menu text" to="/create-article">Create article</Link>
+                                <Link to='/articles' className="each-menu">Articles</Link>
+                                <div className="each-menu">About</div>
                                 {this.props.userDetails._id ?
                                     <div className="user">
                                         <Link to={`/user/${this.props.userDetails._id}`}>Hi, {this.props.userDetails.username}</Link>

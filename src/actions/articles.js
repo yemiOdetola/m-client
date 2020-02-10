@@ -1,4 +1,4 @@
-import { 
+import {
     FETCH_ARTICLES,
     FETCH_ARTICLE,
     FETCH_TAGS,
@@ -220,7 +220,6 @@ export function writeComment(payload) {
     }
 }
 
-
 export function fetchTags() {
     return (dispatch) => {
         dispatch(clear());
@@ -232,6 +231,30 @@ export function fetchTags() {
                 }
                 const payload = response.data;
                 dispatch(allTags(payload))
+            })
+    }
+}
+
+export function createArticle(props, payload) {
+    const userToken = localStorage.getItem('mcUserToken');
+    return dispatch => {
+        dispatch(initialized());
+        axios
+            .post(`${url}/create_article`, payload, {
+                headers: {
+                    'Authorization': userToken
+                }
+            })
+            .then(response => {
+                if (response.success === false) {
+                    dispatch(error());
+                    return console.log(response, 'not successful');
+                }
+                props.history.push('/articles');
+            })
+            .catch(error => {
+                console.log('catch error register', error);
+                throw (error);
             })
     }
 }
@@ -264,9 +287,9 @@ function favs(payload) {
     }
 }
 
-// function following(payload) {
+// function createArt(payload) {
 //     return {
-//         type: FOLLOWING,
+//         type: CREATE_ARTICLE,
 //         payload
 //     }
 // }
