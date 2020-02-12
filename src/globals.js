@@ -1,37 +1,37 @@
 const globals = {
-    BASE_URL: 'http://localhost:5000/api',
+    BASE_URL: 'https://mclone.herokuapp.com/api',
     capitalize: function (str) {
         if (typeof str !== 'string') {
             return '';
         }
         return str.charAt(0).toUpperCase() + str.slice(1)
     },
-    trimTitle: function(str) {
-        if(typeof str !== 'string' && str.length > 70) {
+    trimTitle: function (str) {
+        if (typeof str !== 'string' && str.length > 70) {
             return;
         }
         let substr = str.substring(0, 70)
         return `${substr}...`
     },
-    trimSubtitle: function(str) {
-        if(typeof str !== 'string' && str.length > 136) {
+    trimSubtitle: function (str) {
+        if (typeof str !== 'string' && str.length > 136) {
             return;
         }
         let substr = str.substring(0, 136)
         return `${substr}...`
     },
-    checkFavorite: function(arr, userId) {
+    checkFavorite: function (arr, userId) {
         const favorited = arr.filter(user => user === userId);
-        if(typeof favorited[0] !== 'undefined') {
+        if (typeof favorited[0] !== 'undefined') {
             return true;
         } else {
             return false;
         }
     },
-    checkFans: function(arr, userId) {
-        if(typeof arr === 'undefined') return false;
+    checkFans: function (arr, userId) {
+        if (typeof arr === 'undefined') return false;
         const followed = arr.filter(user => user === userId);
-        if(typeof followed[0] !== 'undefined') {
+        if (typeof followed[0] !== 'undefined') {
             return true;
         } else {
             return false;

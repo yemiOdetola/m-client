@@ -19,6 +19,8 @@
         .feature-img {
             @media(min-width: 768px) {
                 margin-right: 2rem;
+                // display: flex;
+                // align-items: center;
             }
             img {
                 display: block;
