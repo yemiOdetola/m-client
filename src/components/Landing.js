@@ -8,9 +8,7 @@ import { fetchTags } from '../actions/articles';
 
 export class Landing extends Component {
     componentDidMount() {
-        if (localStorage.getItem('mcUserToken')) {
-            this.props.fetchTags();
-        }
+        this.props.fetchTags();
     }
     render() {
         let tags = [];
