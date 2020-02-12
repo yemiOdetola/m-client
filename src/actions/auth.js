@@ -11,7 +11,6 @@ export function register(props, payload) {
                     return console.log(response, 'not successful');
                 }
                 const user = response.data;
-                console.log(user);
                 dispatch(profileCreated(user));
                 props.history.push('/login');
             })
@@ -24,6 +23,7 @@ export function register(props, payload) {
 
 export function login(props, payload) {
     return dispatch => {
+        dispatch(initialized());
         axios.post(`${url}/login`, payload)
             .then(response => {
                 if (response.success === false) {
