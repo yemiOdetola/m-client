@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../../assets/styles/layouts/header.scss';
 import '../../assets/styles/shared.scss';
-import { profileDetails } from '../../actions/auth';
+import { profileDetails, logout } from '../../actions/auth';
 
 export class Header extends Component {
     constructor(props) {
@@ -14,11 +14,13 @@ export class Header extends Component {
     }
 
     componentDidMount() {
+        if (!localStorage.getItem('mcUserToken')) return;
         if (!this.props.userDetails.username) this.props.profileDetails();
     }
 
     logout = () => {
         localStorage.setItem('mcUserToken', '');
+        this.props.logout();
         window.location.reload();
     }
 
@@ -38,7 +40,7 @@ export class Header extends Component {
                                 </Link>
                             </div>
                             <nav className="menu">
-                                <Link className="each-menu text" to="/create-article">Create article</Link>
+                                <Link className={this.props.userDetails._id ? "each-menu text" : 'hide'} to="/create-article">Create article</Link>
                                 <Link to='/articles' className="each-menu">Articles</Link>
                                 <div className="each-menu">About</div>
                                 {this.props.userDetails._id ?
@@ -63,7 +65,7 @@ export class Header extends Component {
                         <div className={this.state.open ? "menu-items slide-in" : 'hide'}>
                             <div className="each">item</div>
                             <div className="each"><Link to="/articles">Articles</Link></div>
-                            <div className="each"><Link to="/create-article">Create article</Link></div>
+                            <div className={this.props.userDetails._id ? "each" : 'hide'}><Link to="/create-article">Create article</Link></div>
                             {this.props.userDetails._id ?
                                 <div className="user">
                                     <Link to={`/user/${this.props.userDetails._id}`}>Hi, {this.props.userDetails.username}</Link>
@@ -83,4 +85,4 @@ const mapStateToProps = (state) => ({
     userDetails: state.auth.userDetails
 })
 
-export default connect(mapStateToProps, { profileDetails })(Header);
+export default connect(mapStateToProps, { profileDetails, logout })(Header);

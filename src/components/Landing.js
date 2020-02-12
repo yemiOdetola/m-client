@@ -10,8 +10,6 @@ export class Landing extends Component {
     componentDidMount() {
         if (localStorage.getItem('mcUserToken')) {
             this.props.fetchTags();
-        } else {
-            this.props.history.push('/login');
         }
     }
     render() {
@@ -38,7 +36,7 @@ export class Landing extends Component {
                                 </div>
                                 <div className="banner-actions">
                                     <button className="bttn primary mr-2"><Link to="/register">Get started</Link></button>
-                                    <button className="bttn plain">or learn more</button>
+                                    <Link className="bttn plain" to="/articles">See articles</Link>
                                 </div>
                             </div>
                             <div className="col-xl-6 col-md-12">

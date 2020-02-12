@@ -46,7 +46,7 @@ export class Login extends Component {
                 <Header />
                 <Loader loading={this.state.loading} />
                 <div className="form-component">
-                    <div className="overlay"></div>
+                    {/* <div className="overlay"></div> */}
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="kard mt-5">

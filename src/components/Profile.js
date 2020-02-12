@@ -22,7 +22,7 @@ export class Profile extends Component {
   }
   componentDidMount() {
     const id = this.props.match.params.id;
-    this.setState({id});
+    this.setState({ id });
     this.userrr(id);
   }
 
@@ -205,7 +205,7 @@ export class Profile extends Component {
                 <div className="bio">{this.state.user.bio}</div>
               </div>
               <div className="edit-link" >
-                <Link className="link" to={`/edit-profile/${this.state.id}`}>Edit profile</Link>
+                <Link className={this.props.userr && this.props.userr.name ? "link" : 'hide'} to={`/edit-profile/${this.state.id}`}>Edit profile</Link>
               </div>
             </div> : <Loader loading={true} />}
           <div className="arts">

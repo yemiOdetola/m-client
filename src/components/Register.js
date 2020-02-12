@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../assets/styles/components/register.scss';
 import Header from './layouts/Header';
 import PropTypes from 'prop-types';
@@ -54,6 +54,7 @@ export class Register extends Component {
                 <Header />
                 <Loader loading={this.state.loading} />
                 <div className="form-component">
+                    {/* <div className="overlay"></div> */}
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="kard mt-5">

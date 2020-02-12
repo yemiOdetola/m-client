@@ -1,4 +1,4 @@
-import { LOGIN, SIGN_UP, USER_DETAILS, PROFILE, FOLLOWING, INITIALIZED, ERROR, CLEAR } from '../actions/action-constants';
+import { LOGIN, SIGN_UP, USER_DETAILS, PROFILE, FOLLOWING, LOGOUT, INITIALIZED, ERROR, CLEAR } from '../actions/action-constants';
 import axios from 'axios';
 import globals from '../globals';
 const url = `${globals.BASE_URL}/users`;
@@ -18,6 +18,12 @@ export function register(props, payload) {
                 console.log('catch error register', error);
                 throw (error);
             })
+    }
+}
+
+export function logout() {
+    return (dispatch) => {
+        dispatch(clearUser());
     }
 }
 
@@ -172,6 +178,12 @@ function user(data) {
     };
 }
 
+function clearUser() {
+    return {
+        type: LOGOUT,
+        payload: ''
+    }
+}
 function clear() {
     return {
         type: CLEAR,

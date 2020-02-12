@@ -42,6 +42,13 @@
             display: flex;
             justify-content: flex-start;
             margin-top: 2rem;
+            a {
+                display: block;
+                margin-left: 0.75rem;
+                &.plain {
+                    margin-top: 0.75rem;
+                }
+            }
         }
         .banner-image {
             @media(max-width: 1199px) {

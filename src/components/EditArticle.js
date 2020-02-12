@@ -6,7 +6,7 @@ import axios from 'axios';
 import globals from '../globals';
 import Loader from './utils/Loader';
 import Header from './layouts/Header';
-import { createArticle, editArticle} from '../actions/articles';
+import { createArticle, editArticle } from '../actions/articles';
 
 
 export class EditArticle extends Component {
@@ -24,10 +24,13 @@ export class EditArticle extends Component {
   }
 
   componentDidMount() {
+    if (!localStorage.getItem('mcUserToken')) {
+      this.props.history.push('/login')
+    }
     if (this.props.match.params.id) {
       const id = this.props.match.params.id;
       this.fetchArticle(id);
-      this.setState({id})
+      this.setState({ id })
     }
   }
 
@@ -183,6 +186,6 @@ const mapStateToProps = (state) => ({
   initialized: state.articles.initialized
 })
 
-const mapDispatchToProps = { createArticle, editArticle}
+const mapDispatchToProps = { createArticle, editArticle }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditArticle)

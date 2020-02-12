@@ -8,7 +8,8 @@ import {
     INITIALIZED,
     ERROR,
     COMPLETED,
-    CLEAR, } from '../actions/action-constants';
+    CLEAR,
+} from '../actions/action-constants';
 import axios from 'axios';
 import globals from '../globals';
 
@@ -150,17 +151,17 @@ export function fetchComments(articleId) {
     return dispatch => {
         dispatch(initialized());
         axios
-        .get(`${url}/article/${articleId}/comments`, {
-            headers: {
-                'Authorization': userToken
-            }
-        })
-        .then(response => {
-            if (response.success === false) {
-                dispatch(error());
-                return console.log(response, 'not successful');
-            }
-            const res = response.data;
+            .get(`${url}/article/${articleId}/comments`, {
+                headers: {
+                    'Authorization': userToken
+                }
+            })
+            .then(response => {
+                if (response.success === false) {
+                    dispatch(error());
+                    return console.log(response, 'not successful');
+                }
+                const res = response.data;
                 dispatch(clear())
                 dispatch(completed());
                 dispatch(comments(res.comments))

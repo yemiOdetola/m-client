@@ -141,8 +141,10 @@
       }
       .menu-item {
         font-size: 0.875rem;
-        color: #333;
+        color: #555;
         margin-right: 1rem;
+        text-transform: uppercase;
+        font-weight: 600;
         &:hover {
           cursor: pointer;
         }
