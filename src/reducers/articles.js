@@ -75,6 +75,7 @@ export default function articles(state = initialState, action) {
         case CLEAR:
             return {
                 ...state,
+                articles: [],
                 comments: [],
                 authorized: [],
                 favorites: [],

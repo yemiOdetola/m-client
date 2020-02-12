@@ -131,10 +131,12 @@ export class Profile extends Component {
               <img src={require('../assets/images/unbookmark.svg')}
                 className={globals.checkFavorite(fav.favorites, this.props.userDetails._id)
                   ? 'hide' : 'favorite'}
+                title="Add to favorites"
                 onClick={() => this.addToFav(fav._id)} alt="" />
               <img src={require('../assets/images/bookmarked.svg')}
                 className={globals.checkFavorite(fav.favorites, this.props.userDetails._id)
                   ? 'favorite' : 'hide'}
+                title="Remove to favorites"
                 onClick={() => this.removeFromFav(fav._id)} alt="" />
             </div>
             <Link to={`/article/${fav._id}`}>

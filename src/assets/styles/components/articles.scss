@@ -88,9 +88,33 @@
                     position: relative;
                     bottom: 0.25rem;
                    img.favorite {
-                       width: 22px;
+                        width: 22px;
+                        position: relative;
                        &:hover {
                            cursor: pointer;
+                           &:after {
+                            display: -webkit-flex;
+                            display: flex;
+                            -webkit-justify-content: center;
+                            justify-content: center;
+                            background: #444;
+                            border-radius: 8px;
+                            color: #fff;
+                            content: attr(title);
+                            margin: -82px auto 0;
+                            font-size: 1rem;
+                            padding: 0.875rem;
+                            width: 220px;
+                           }
+                           &:before {
+                            border: solid;
+                            border-color: #444 transparent;
+                            border-width: 12px 6px 0 6px;
+                            content: "";
+                            left: 45%;
+                            bottom: 30px;
+                            position: absolute;
+                           }
                        }
                    }
                 }

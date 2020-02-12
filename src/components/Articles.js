@@ -66,10 +66,12 @@ export class Articles extends Component {
                                 <img src={require('../assets/images/unbookmark.svg')}
                                     className={globals.checkFavorite(article.favorites, this.props.userDetails._id)
                                         ? 'hide' : 'favorite'}
+                                    title="Add to favorites"
                                     onClick={() => this.addToFav(article._id)} alt="" />
                                 <img src={require('../assets/images/bookmarked.svg')}
                                     className={globals.checkFavorite(article.favorites, this.props.userDetails._id)
                                         ? 'favorite' : 'hide'}
+                                    title="Remove to favorites"
                                     onClick={() => this.removeFromFav(article._id)} alt="" />
                             </div>
                         </div>
@@ -99,7 +101,7 @@ export class Articles extends Component {
                                                 <div className="index">01</div>
                                             </div>
                                             <div className="detail">
-                                                <h3 className="title">The Influencer and the Hit Man: How a Years-Long Domain Name Feud Ended in a Bloody Shootout</h3>
+                                                <h3 className="title">We are static, don't click us: How a Years-Long Domain Name Feud Ended in a Bloody Shootout</h3>
                                                 <div className="author">Brotha in #druckas</div>
                                                 <div className="extras">Dec 10 2015</div>
                                             </div>
@@ -109,7 +111,7 @@ export class Articles extends Component {
                                                 <div className="index">02</div>
                                             </div>
                                             <div className="detail">
-                                                <h3 className="title">The Influencer and the Hit Man: How a Years-Long Domain Name Feud Ended in a Bloody Shootout</h3>
+                                                <h3 className="title">We are static, don't click us: How a Years-Long Domain Name Feud Ended in a Bloody Shootout</h3>
                                                 <div className="author">Brotha in #druckas</div>
                                                 <div className="extras">Dec 10 2015</div>
                                             </div>
@@ -119,7 +121,7 @@ export class Articles extends Component {
                                                 <div className="index">03</div>
                                             </div>
                                             <div className="detail">
-                                                <h3 className="title">The Influencer and the Hit Man: How a Years-Long Domain Name Feud Ended in a Bloody Shootout</h3>
+                                                <h3 className="title">We are static, don't click us: How a Years-Long Domain Name Feud Ended in a Bloody Shootout</h3>
                                                 <div className="author">Brotha in #druckas</div>
                                                 <div className="extras">Dec 10 2015</div>
                                             </div>
@@ -129,7 +131,7 @@ export class Articles extends Component {
                                                 <div className="index">04</div>
                                             </div>
                                             <div className="detail">
-                                                <h3 className="title">The Influencer and the Hit Man: How a Years-Long Domain Name Feud Ended in a Bloody Shootout</h3>
+                                                <h3 className="title">We are static, don't click us: How a Years-Long Domain Name Feud Ended in a Bloody Shootout</h3>
                                                 <div className="author">Brotha in #druckas</div>
                                                 <div className="extras">Dec 10 2015</div>
                                             </div>
@@ -139,7 +141,7 @@ export class Articles extends Component {
                                                 <div className="index">05</div>
                                             </div>
                                             <div className="detail">
-                                                <h3 className="title">The Influencer and the Hit Man: How a Years-Long Domain Name Feud Ended in a Bloody Shootout</h3>
+                                                <h3 className="title">We are static, don't click us: How a Years-Long Domain Name Feud Ended in a Bloody Shootout</h3>
                                                 <div className="author">Brotha in #druckas</div>
                                                 <div className="extras">Dec 10 2015</div>
                                             </div>

@@ -158,10 +158,12 @@ export class Article extends Component {
                             <img src={require('../assets/images/unbookmark.svg')}
                                 className={globals.checkFavorite(this.props.article.favorites, this.props.userDetails._id)
                                     ? 'hide' : 'favorite'}
+                                title="Add to favorites"
                                 onClick={this.addToFav} alt="" />
                             <img src={require('../assets/images/bookmarked.svg')}
                                 className={globals.checkFavorite(this.props.article.favorites, this.props.userDetails._id)
                                     ? 'favorite' : 'hide'}
+                                title="Remove to favorites"
                                 onClick={this.removeFromFav} alt="" />
                             <div className={this.props.article.author._id === this.props.userDetails._id ? "divider" : 'hide'}></div>
                             <Link to={`/edit-article/${this.props.article._id}`}
@@ -169,6 +171,7 @@ export class Article extends Component {
                                 <img src={require('../assets/images/edit.svg')} alt="edit article" />
                             </Link>
                             <img className={this.props.article.author._id === this.props.userDetails._id ? "" : 'hide'}
+                                title="Delete article permanently"
                                 src={require('../assets/images/trash.svg')} onClick={this.deleteArt} alt="delete article" />
                         </div>
                     </div>
