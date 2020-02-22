@@ -1,0 +1,280 @@
+@media (min-width: 1200px) {
+  .articles-component {
+    width: 82%;
+    margin: auto;
+  }
+}
+
+.articles-component .article {
+  max-width: 650px;
+  text-align: left;
+  display: block;
+  margin: 0 0 3rem;
+}
+
+@media (max-width: 767px) {
+  .articles-component .article {
+    padding: 1.25rem;
+    -webkit-box-shadow: 1px 1px 4px #d4d5d7;
+            box-shadow: 1px 1px 4px #d4d5d7;
+    border-radius: 0.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .articles-component .article {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .articles-component .article .feature-img {
+    margin-right: 2rem;
+  }
+}
+
+.articles-component .article .feature-img img {
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .articles-component .article .feature-img img {
+    width: 140px;
+  }
+}
+
+.articles-component .article .details {
+  width: 95%;
+}
+
+@media (max-width: 767px) {
+  .articles-component .article .details {
+    margin-top: 1.5rem;
+  }
+}
+
+.articles-component .article .details .tag {
+  color: #b9b9b9;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.65rem;
+}
+
+.articles-component .article .details .title {
+  font-family: 'EB Garamond', serif;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.articles-component .article .details .title a {
+  color: #000;
+  font-size: 1.125rem;
+  letter-spacing: -0.5px;
+}
+
+@media (min-width: 768px) {
+  .articles-component .article .details .title {
+    font-size: 1.25rem;
+  }
+}
+
+.articles-component .article .details .description {
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.articles-component .article .details .description a {
+  color: #6C6B6B;
+}
+
+.articles-component .article .details .description a:hover {
+  text-decoration: none;
+}
+
+.articles-component .article .details .others {
+  margin-top: 0.75rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.articles-component .article .details .others .author-time {
+  color: #333;
+  font-size: 0.75rem;
+}
+
+.articles-component .article .details .others .author-time a {
+  color: #333;
+  text-decoration: underline;
+}
+
+.articles-component .article .details .others .author-time a:hover {
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .articles-component .article .details .others .author-time {
+    font-size: 0.875rem;
+  }
+}
+
+.articles-component .article .details .others .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  bottom: 0.25rem;
+}
+
+.articles-component .article .details .others .actions img.favorite {
+  width: 22px;
+  position: relative;
+}
+
+.articles-component .article .details .others .actions img.favorite:hover {
+  cursor: pointer;
+}
+
+.articles-component .article .details .others .actions img.favorite:hover:after {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: #444;
+  border-radius: 8px;
+  color: #fff;
+  content: attr(title);
+  margin: -82px auto 0;
+  font-size: 1rem;
+  padding: 0.875rem;
+  width: 220px;
+}
+
+.articles-component .article .details .others .actions img.favorite:hover:before {
+  border: solid;
+  border-color: #444 transparent;
+  border-width: 12px 6px 0 6px;
+  content: "";
+  left: 45%;
+  bottom: 30px;
+  position: absolute;
+}
+
+.articles-component .sidebar .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem;
+  min-height: 120px;
+  background-color: rgba(199, 255, 224, 0.61);
+}
+
+.articles-component .sidebar .header .title {
+  font-family: 'EB Garamond', serif;
+  text-align: left;
+  text-transform: capitalize;
+  font-size: 1.125rem;
+  color: #000000;
+  font-weight: 800;
+  margin: auto 0;
+}
+
+@media (min-width: 1200px) {
+  .articles-component .sidebar .header .title {
+    width: 40%;
+    font-size: 1.75rem;
+  }
+}
+
+.articles-component .sidebar .header .illustration-mello img {
+  width: 95px;
+}
+
+@media (min-width: 768px) {
+  .articles-component .sidebar .header .illustration-mello img {
+    width: 100px;
+  }
+}
+
+.articles-component .sidebar .body {
+  background: #faf9f9;
+  padding: 2.25rem 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.articles-component .sidebar .body .article-preview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.articles-component .sidebar .body .article-preview .icon img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.articles-component .sidebar .body .article-preview .icon .index {
+  color: #adadad;
+  font-weight: 300;
+  font-size: 1.75rem;
+  letter-spacing: -4px;
+  margin-right: 0.75rem;
+}
+
+.articles-component .sidebar .body .article-preview .detail {
+  text-align: left;
+}
+
+.articles-component .sidebar .body .article-preview .detail .title {
+  font-size: 0.80rem;
+  color: #333;
+  font-weight: 700;
+  line-height: 1.35rem;
+}
+
+@media (min-width: 1024px) {
+  .articles-component .sidebar .body .article-preview .detail .title {
+    font-size: 0.935rem;
+  }
+}
+
+.articles-component .sidebar .body .article-preview .detail .author {
+  font-size: 0.75rem;
+  color: #555;
+  margin-top: 0.25rem;
+  font-weight: 300;
+}
+
+@media (min-width: 1024px) {
+  .articles-component .sidebar .body .article-preview .detail .author {
+    font-size: 0.875rem;
+  }
+}
+
+.articles-component .sidebar .body .article-preview .detail .extras {
+  font-size: 0.75rem;
+  color: #777;
+  font-weight: 500;
+}
+/*# sourceMappingURL=articles.css.map */

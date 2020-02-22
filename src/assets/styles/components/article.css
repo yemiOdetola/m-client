@@ -1,0 +1,277 @@
+@media (min-width: 1200px) {
+  .article-component {
+    width: 82%;
+    margin: auto;
+  }
+}
+
+.article-component .title {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.84);
+  line-height: 35px;
+}
+
+@media (min-width: 992px) {
+  .article-component .title {
+    width: 80%;
+    margin: auto;
+    font-size: 2rem;
+  }
+}
+
+.article-component .user-share {
+  margin: 2rem auto;
+}
+
+@media (min-width: 768px) {
+  .article-component .user-share {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+@media (min-width: 992px) {
+  .article-component .user-share {
+    width: 80%;
+  }
+}
+
+.article-component .user-share .user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.article-component .user-share .user .others {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.article-component .user-share .user .others a.name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .article-component .user-share .user .others a.name {
+    font-size: 0.875rem;
+  }
+}
+
+.article-component .user-share .user .profile-img {
+  margin-right: 0.5rem;
+}
+
+.article-component .user-share .user .profile-img img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+@media (min-width: 768px) {
+  .article-component .user-share .user .profile-img img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.article-component .user-share .social-favorite {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (max-width: 767px) {
+  .article-component .user-share .social-favorite {
+    margin-top: 1rem;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+}
+
+.article-component .user-share .social-favorite .divider {
+  border: 1px solid #ddd;
+  height: 40px;
+  margin-right: 1rem;
+}
+
+.article-component .user-share .social-favorite img, .article-component .user-share .social-favorite a img {
+  width: 28px;
+  height: 28px;
+  display: block;
+  margin-right: 1rem;
+}
+
+.article-component .user-share .social-favorite img:hover, .article-component .user-share .social-favorite a img:hover {
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .article-component .user-share .social-favorite img, .article-component .user-share .social-favorite a img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.article-component .feature-img img {
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+
+.article-component .description {
+  font-family: 'EB Garamond', serif;
+  text-align: left;
+  font-size: 1.125rem;
+  margin-top: 1rem;
+  color: #444;
+  line-height: 2rem;
+}
+
+@media (min-width: 992px) {
+  .article-component .description {
+    width: 80%;
+    margin: 2rem  auto;
+    font-size: 1.25rem;
+  }
+}
+
+.article-component .body {
+  text-align: left;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+  line-height: 2rem;
+  color: #555;
+}
+
+@media (min-width: 992px) {
+  .article-component .body {
+    width: 80%;
+    line-height: 2.5rem;
+    margin: 2rem auto;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .article-component .new-comment {
+    padding: 0.75rem 1.25rem;
+    width: 85%;
+    margin: auto;
+    display: block;
+  }
+}
+
+.article-component .new-comment textarea {
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 0.25rem;
+  width: 100%;
+  padding: 1rem;
+}
+
+.article-component .new-comment textarea:active, .article-component .new-comment textarea:focus {
+  outline: none;
+}
+
+.comments {
+  margin: 1rem auto;
+}
+
+@media (min-width: 992px) {
+  .comments {
+    width: 80%;
+  }
+}
+
+.comments .comment {
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  margin: 1.5rem auto;
+  width: 100%;
+  padding: 1rem;
+}
+
+.comments .comment .body {
+  margin-bottom: 2rem;
+  width: 98%;
+}
+
+.comments .comment .delete {
+  position: relative;
+  bottom: 1.35rem;
+  opacity: 0.5;
+  float: right;
+  left: 0.75rem;
+}
+
+.comments .comment .delete:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .comments .comment .delete {
+    bottom: 1rem;
+  }
+}
+
+.comments .comment .delete img {
+  width: 18px;
+  height: 18px;
+}
+
+.comments .comment .author {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.comments .comment .author img {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.comments .comment .author .user {
+  display: block;
+}
+
+.comments .comment .author .user a {
+  color: #333;
+  display: block;
+}
+/*# sourceMappingURL=article.css.map */
